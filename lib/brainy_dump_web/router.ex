@@ -2,7 +2,7 @@ defmodule BrainyDumpWeb.Router do
   use BrainyDumpWeb, :router
 
   pipeline :browser do
-    plug(:accepts, ["html"])
+    plug(:accepts, ["tml"])
     plug(:fetch_session)
     plug(:fetch_flash)
     plug(:protect_from_forgery)
@@ -18,6 +18,13 @@ defmodule BrainyDumpWeb.Router do
     pipe_through(:browser)
 
     get("/", StaticPageController, :index)
+  end
+
+  scope "/api", BrainyDumpWeb do
+    pipe_through(:api)
+
+    resources("/posts", PostController, except: [:new, :edit])
+    resources("/tags", TagController, except: [:new, :edit])
   end
 
   # Other scopes may use custom stacks.
