@@ -17,7 +17,18 @@ defmodule BrainyDumpWeb.PostController do
   end
 
   def create(conn, post_params) do
-    post = Post.changeset(%Post{}, post_params)
+    tags =
+      post_params["tags"]
+      |> Enum.map(fn tag ->
+        Repo.one(
+          from(
+            t in Tag,
+            where: t.id == ^tag["id"]
+          )
+        )
+      end)
+
+    post = Post.changeset(%Post{}, post_params, tags)
 
     if post.valid? do
       {:ok, post} = Repo.insert(post)

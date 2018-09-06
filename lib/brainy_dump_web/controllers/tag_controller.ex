@@ -11,23 +11,25 @@ defmodule BrainyDumpWeb.TagController do
   def index(conn, _params) do
     tags =
       Repo.all(Tag)
-      |> Enum.map(fn tag -> Repo.preload(tag, :tags) end)
+      |> Enum.map(fn tag -> Repo.preload(tag, :posts) end)
 
     render(conn, "index.json", tags: tags)
   end
 
   def create(conn, tag_params) do
-    tag_params = %{
-      tag_params
-      | posts:
-          Repo.one(
-            from(p in Post,
-              where: p.id == 1
-            )
-          )
-    }
 
-    tag = Tag.changeset(%Tag{}, tag_params)
+    posts =
+      tag_params["posts"]
+      |> Enum.map(fn post ->
+        Repo.one(
+          from(
+            p in Post,
+            where: p.id == ^post["id"]
+          )
+        )
+      end)
+
+    tag = Tag.changeset(%Tag{}, tag_params, posts)
 
     if tag.valid? do
       {:ok, tag} = Repo.insert(tag)

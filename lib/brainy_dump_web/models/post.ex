@@ -10,9 +10,14 @@ defmodule BrainyDumpWeb.Post do
     timestamps()
   end
 
-  def changeset(post, params) do
+  def changeset(post, params, tags \\ nil)
+  def changeset(post, params, nil) do
     post
     |> cast(params, ~w(title body), [])
-    |> cast_assoc(:tags)
+  end
+  def changeset(post, params, tags) do
+    post
+    |> cast(params, ~w(title body), [])
+    |> put_assoc(:tags, tags)
   end
 end
