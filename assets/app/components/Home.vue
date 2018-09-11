@@ -1,7 +1,6 @@
 <template>
   <div class="home">
     fucking bitch
-    <PostCreator/>
   </div>
 </template>
 
@@ -11,9 +10,6 @@ import PostCreator from "./PostCreator";
 
 export default {
   name: "Home",
-  components: {
-    PostCreator
-  },
   data() {
     return {
       topic: {}
@@ -24,3 +20,5 @@ export default {
   }
 };
 </script>
+<style>
+</style>

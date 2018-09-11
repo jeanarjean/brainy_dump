@@ -16,10 +16,9 @@ defmodule BrainyDumpWeb.TagController do
     render(conn, "index.json", tags: tags)
   end
 
-  def create(conn, tag_params) do
-
+  def create(conn, tag_params = %{"posts" => posts}) do
     posts =
-      tag_params["posts"]
+      posts
       |> Enum.map(fn post ->
         Repo.one(
           from(

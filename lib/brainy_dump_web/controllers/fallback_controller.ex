@@ -5,6 +5,7 @@ defmodule BrainyDumpWeb.FallbackController do
   See `Phoenix.Controller.action_fallback/1` for more details.
   """
   use BrainyDumpWeb, :controller
+  require Logger
 
   def call(conn, {:error, %Ecto.Changeset{} = changeset}) do
     conn
@@ -13,6 +14,13 @@ defmodule BrainyDumpWeb.FallbackController do
   end
 
   def call(conn, {:error, :not_found}) do
+    conn
+    |> put_status(:not_found)
+    |> render(BrainyDumpWeb.ErrorView, "error.json", :not_found)
+  end
+
+  def call(conn, something) do
+    Logger.warn(inspect something)
     conn
     |> put_status(:not_found)
     |> render(BrainyDumpWeb.ErrorView, "error.json", :not_found)

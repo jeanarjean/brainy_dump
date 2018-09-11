@@ -17,6 +17,8 @@ defmodule BrainyDumpWeb.PostView do
       id: post.id,
       title: post.title,
       body: post.body,
+      updated_at: post.updated_at,
+      inserted_at: post.inserted_at
     }
   end
 end

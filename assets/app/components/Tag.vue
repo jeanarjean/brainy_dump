@@ -1,10 +1,22 @@
 <template>
   <div class="tag">
-      <h1> {{tag.name}}</h1>
+    <div>
+      <h1 class="tag-title"> {{tag.name}}</h1>
+      <h2> Last updated: {{formatDate(tag.updated_at)}}</h2>
       <div v-for="post in tag.posts" :key="post.id">
-          <h2> {{post.title}} </h2>
-          {{post.body}}
+        <div class="post-title">
+          <h3> {{post.title}} </h3>
+          <h2> {{formatDate(post.inserted_at)}} </h2>
         </div>
+        <div v-html="post.body">
+        </div>
+      </div>
+    </div>
+    <div>
+       <router-link :to="{ name: 'Posts', params: { tag: tag.name }}" class="new-post">
+        +
+       </router-link>
+    </div>
   </div>
 </template>
 
@@ -16,14 +28,44 @@ export default {
   data() {
     return {
       id: {},
-      tag: {}
+      tag: {},
+      posts: []
     };
   },
   mounted: function() {
     this.id = this.$route.params.id;
     tag_api.get_tag(this.id, response => {
       this.tag = response;
+      console.log(this.tag.posts);
+      this.tag.posts = this.tag.posts.sort(function(a, b) {
+        return new Date(b.inserted_at) - new Date(a.inserted_at);
+      });
+      console.log(this.tag.posts);
     });
+  },
+  methods: {
+    formatDate(date) {
+      var d = new Date(date);
+      return d.toDateString();
+    }
   }
 };
 </script>
+<style>
+.tag {
+  display: flex;
+  justify-content: space-between;
+}
+.new-post {
+  font-size: 50px;
+}
+
+.post-title {
+  display: flex;
+  justify-content: space-between;
+}
+
+.tag-title {
+  font-size: 4rem;
+}
+</style>
