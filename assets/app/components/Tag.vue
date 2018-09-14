@@ -13,7 +13,7 @@
       </div>
     </div>
     <div>
-       <router-link :to="{ name: 'Posts', params: { tag: tag.name }}" class="new-post">
+       <router-link :to="{ name: 'New Post', params: { tag: tag.name }}" class="new-post">
         +
        </router-link>
     </div>

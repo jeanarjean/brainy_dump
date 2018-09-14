@@ -4,7 +4,7 @@
         <router-link :to="{ path: '/tags/'}">
           <h1> Tags </h1>
         </router-link>
-        <router-link :to="{ path: '/tags/'}">
+        <router-link :to="{ path: '/tags/new'}">
           <h1> New Tags </h1>
         </router-link>
         <router-link :to="{ path: '/posts/'}">

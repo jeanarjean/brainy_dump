@@ -16,6 +16,8 @@ defmodule BrainyDumpWeb.TagController do
     render(conn, "index.json", tags: tags)
   end
 
+  def create(conn, tag_params)
+
   def create(conn, tag_params = %{"posts" => posts}) do
     posts =
       posts
@@ -29,6 +31,21 @@ defmodule BrainyDumpWeb.TagController do
       end)
 
     tag = Tag.changeset(%Tag{}, tag_params, posts)
+
+    if tag.valid? do
+      {:ok, tag} = Repo.insert(tag)
+
+      tag = Repo.preload(tag, :posts)
+
+      conn
+      |> put_status(:created)
+      |> put_resp_header("location", tag_path(conn, :show, tag))
+      |> render("show.json", tag: tag)
+    end
+  end
+
+  def create(conn, tag_params) do
+    tag = Tag.changeset(%Tag{}, tag_params)
 
     if tag.valid? do
       {:ok, tag} = Repo.insert(tag)

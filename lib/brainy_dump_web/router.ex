@@ -18,6 +18,8 @@ defmodule BrainyDumpWeb.Router do
     pipe_through(:browser)
 
     get("/", StaticPageController, :index)
+    get("/router/*wildcard", StaticPageController, :index)
+    get("/tags/*wildcard", StaticPageController, :index)
   end
 
   scope "/api", BrainyDumpWeb do
