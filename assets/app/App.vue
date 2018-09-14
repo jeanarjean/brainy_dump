@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div class="app-container"> 
-      <Header> </Header>
+      <Header class="header"> </Header>
       <div class="body">
         <router-view></router-view>
       </div>
@@ -27,7 +27,6 @@ export default {
 
 <style>
 #app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
@@ -53,12 +52,21 @@ export default {
   background-color: lightgray;
 }
 
-.sidebar {
-  grid-area: sidebar;
-  margin-top: 50px;
+
+.header {
+  grid-area: header;
 }
 
 body {
   margin: 0;
+  font-family: 'Merriweather', serif;
+}
+
+h1 {
+  margin: 0;
+}
+
+a:visited {
+  color: red;
 }
 </style>

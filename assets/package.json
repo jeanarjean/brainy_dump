@@ -1,5 +1,5 @@
 {
-  "name": "xavier-brain",
+  "name": "brainy-dump",
   "description": "The next level of note taking",
   "version": "1.0.0",
   "scripts": {
@@ -7,7 +7,7 @@
     "build": "brunch build --production"
   },
   "author": {
-    "url": "http://rorscharg.com",
+    "url": "https://brainydump.com",
     "name": "rorscharg.com",
     "email": "rorscharg@gmail.com"
   },
@@ -20,6 +20,7 @@
   "dependencies": {
     "vue": "^2.5",
     "vue-router": "^3.0.1",
+    "vue2-editor": "^2.6.6",
     "vuex": "^3.0.1",
     "vuex-persistedstate": "^2.5.2"
   },

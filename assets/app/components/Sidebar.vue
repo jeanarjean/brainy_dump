@@ -27,16 +27,22 @@ export default {
 
 <style>
 .sidebar-container {
-  width: 300px;
+  margin-top: 50px;
+  text-align: right;
+
+}
+
+.sidebar-content {
+  display: inline-block;
+  width: 200px;
   height: 70vh;
+  text-align: left;
+  border-width: 3px;
+  border-style: solid;
+  border-radius: 2px;
 }
 
 .sidebar-content {
   background-color: gray;
-
-  width: 240px;
-  height: 85vh;
-  margin-left: 20px;
-  margin-right: 20px;
 }
 </style>

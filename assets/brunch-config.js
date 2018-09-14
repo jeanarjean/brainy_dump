@@ -23,6 +23,11 @@ module.exports = {
         vue: {
             extractCSS: true,
             out: '../priv/static/css/components.css'
+        },
+        sass: {
+            options: {
+                includePaths: ['node_modules/foundation/scss']
+            }
         }
     },
     paths: {
