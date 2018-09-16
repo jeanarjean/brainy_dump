@@ -14,10 +14,12 @@ defmodule BrainyDumpWeb.Post do
   def changeset(post, params, nil) do
     post
     |> cast(params, ~w(title body), [])
+    |> validate_length(:title, max: 60)
   end
   def changeset(post, params, tags) do
     post
     |> cast(params, ~w(title body), [])
     |> put_assoc(:tags, tags)
+    |> validate_length(:title, max: 60)
   end
 end
