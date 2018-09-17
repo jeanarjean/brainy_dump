@@ -7,7 +7,7 @@
       <input placeholder="Tags (at least one)" class="post-form-tags" v-model="data.tags">
       <br/>
       <br/>
-      <VueEditor v-model="data.body"></VueEditor>
+      <VueEditor class="body-editor" v-model="data.body"></VueEditor>
       <br/>
       <button v-on:click="this.createPost">Send</button>
 
@@ -94,7 +94,9 @@ export default {
 .post-creator-inner {
   margin-top: 20px;
   width: 95%;
-  margin-left: 20px;
   background-color: white;
+}
+
+.body-editor {
 }
 </style>

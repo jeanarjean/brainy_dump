@@ -6,7 +6,7 @@
         Brainy Dump
       </h1>
       <div class="options">
-        ⚙
+        ons
       </div>
     </div>
 </template>
@@ -27,11 +27,11 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: bisque;
   width: 100vw;
   max-width: 100%;
   height: 8vh;
   grid-area: header;
+  background-color: #fb0;
 }
 
 .options {

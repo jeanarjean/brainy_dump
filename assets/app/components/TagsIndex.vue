@@ -1,17 +1,14 @@
 <template>
   <div class="tags-index">
-    {{tags}}
       <div v-for="tag in tags" :key="tag.id">
         <router-link :to="{ path: '/tags/' + tag.id}">
           <h1> {{tag.name}} </h1>
-          <div v-for="post in tag.posts" :key="post.id">
-            <h2> {{post.title}} </h2>
-           </div>
+            <hr/>
         </router-link>
-
-
-
-          <h5> {{tag.id}} </h5>
+          <div v-for="post in tag.posts" :key="post.id">
+            <h4> {{post.title}} </h4>
+            <div v-html="post.body"> </div>
+          </div>
       </div>
   </div>
 </template>

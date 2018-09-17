@@ -29,7 +29,6 @@ export default {
 .sidebar-container {
   margin-top: 50px;
   text-align: right;
-
 }
 
 .sidebar-content {
@@ -37,12 +36,14 @@ export default {
   width: 200px;
   height: 70vh;
   text-align: left;
-  border-width: 3px;
+  background-color: white;
+  margin-left: 30px;
+  box-shadow:  0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.2), 0 1px 5px 0 rgba(0,0,0,0.12);
+  /* border-width: 3px;
   border-style: solid;
-  border-radius: 2px;
+  border-radius: 2px; */
 }
 
 .sidebar-content {
-  background-color: gray;
 }
 </style>

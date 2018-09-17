@@ -1,7 +1,7 @@
 <template>
   <div class="tag-creator">
-      <h1> name </h1>
-      <input v-model="data.name">
+      <input class="tag-form-name" placeholder="Tag Name" v-model="data.name">
+      <br/>
       <br/>
       <button v-on:click="this.createTag">Send</button>
 
@@ -17,18 +17,37 @@ export default {
   data() {
     return {
       data: {},
-      response: {},
+      response: {}
     };
   },
   methods: {
-      createTag(){
-        tag_api.create_tag(this.data, (response) => {
-            this.response = response;
-        })
-        // this.$router.go(-1);
-      }
+    createTag() {
+      tag_api.create_tag(this.data, response => {
+        this.response = response;
+      });
+      // this.$router.go(-1);
+    }
   }
 };
 </script>
-<style>
+<style lang="scss">
+.tag-form-name {
+  height: 40px;
+  width: 100%;
+  font-size: 40px;
+  border: 0;
+  text-decoration: underline;
+
+  &::-moz-placeholder {
+    text-decoration: underline;
+  }
+
+  &::-webkit-input-placeholder {
+    text-decoration: underline;
+  }
+
+  &::-ms-input-placeholder {
+    text-decoration: underline;
+  }
+}
 </style>

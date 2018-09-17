@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    fucking bitch
+    Hola
   </div>
 </template>
 

@@ -3,7 +3,8 @@
     <div class="app-container"> 
       <Header class="header"> </Header>
       <div class="body">
-        <router-view></router-view>
+        <Body>
+        </Body>
       </div>
       <div class="sidebar">
         <Sidebar/>
@@ -15,11 +16,13 @@
 <script>
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
+import Body from "./components/Body";
 
 export default {
   name: "app",
   components: {
     Header,
+    Body,
     Sidebar
   }
 };
@@ -30,16 +33,17 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
+  background-color: lightgray;
 }
 
 .app-container {
   display: grid;
   grid-template-areas:
     "header header header"
-    "sidebar body body"
+    "sidebar body something"
     "footer footer footer";
-  grid-template-rows: 8vh 1fr 200px;
-  grid-template-columns: 300px 1fr 200px;
+  grid-template-rows: 10vh 1fr 200px;
+  grid-template-columns: 550px 1fr 200px;
 }
 
 .sidebar {
@@ -48,8 +52,6 @@ export default {
 
 .body {
   grid-area: body;
-  margin-top: 50px;
-  background-color: lightgray;
 }
 
 
@@ -67,6 +69,6 @@ h1 {
 }
 
 a:visited {
-  color: red;
+  color: black;
 }
 </style>

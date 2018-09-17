@@ -2,7 +2,7 @@
   <div class="tag">
     <div>
       <h1 class="tag-title"> {{tag.name}}</h1>
-      <h2> Last updated: {{formatDate(tag.updated_at)}}</h2>
+      <h2> Last updated: {{formatDate(tag.posts[0].updated_at)}}</h2>
       <div v-for="post in tag.posts" :key="post.id">
         <div class="post-title">
           <h3> {{post.title}} </h3>
