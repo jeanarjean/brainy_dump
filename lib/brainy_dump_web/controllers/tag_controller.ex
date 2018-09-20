@@ -16,6 +16,20 @@ defmodule BrainyDumpWeb.TagController do
     render(conn, "index.json", tags: tags)
   end
 
+  def show(conn, %{"id" => id}) do
+    tag =
+      Repo.one(
+        from(
+          t in Tag,
+          where: t.id == ^id,
+          left_join: posts in assoc(t, :posts),
+          preload: [posts: posts]
+        )
+      )
+
+    render(conn, "show.json", tag: tag)
+  end
+
   def create(conn, tag_params)
 
   def create(conn, tag_params = %{"posts" => posts}) do
@@ -59,17 +73,37 @@ defmodule BrainyDumpWeb.TagController do
     end
   end
 
-  def show(conn, %{"id" => id}) do
+  def update(conn, tag_params) do
     tag =
       Repo.one(
         from(
           t in Tag,
-          where: t.id == ^id,
+          where: t.id == ^tag_params["id"],
           left_join: posts in assoc(t, :posts),
           preload: [posts: posts]
         )
       )
 
-    render(conn, "show.json", tag: tag)
+    tag = Tag.changeset(tag, tag_params)
+
+    if tag.valid? do
+      {:ok, tag} = Repo.update(tag)
+
+      tag = Repo.preload(tag, :posts)
+
+      conn
+      |> put_status(:ok)
+      |> put_resp_header("location", tag_path(conn, :show, tag))
+      |> render("show.json", tag: tag)
+    end
+  end
+
+  def delete(conn, %{"id" => id}) do
+    tag = Repo.get!(Tag, id)
+
+    case Repo.delete(tag) do
+      {:ok, _something} -> json(conn, %{message: "I win"})
+      {:error, _changeset} -> json(conn, %{message: "I died"})
+    end
   end
 end

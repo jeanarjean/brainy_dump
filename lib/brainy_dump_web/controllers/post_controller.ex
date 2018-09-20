@@ -6,6 +6,7 @@ defmodule BrainyDumpWeb.PostController do
   alias BrainyDump.Repo
   alias BrainyDumpWeb.Post
   alias BrainyDumpWeb.Tag
+  alias BrainyDumpWeb.PostTag
   import Ecto.Query, only: [from: 2]
   import Logger
 
@@ -78,5 +79,40 @@ defmodule BrainyDumpWeb.PostController do
       )
 
     render(conn, "show.json", post: post)
+  end
+
+  def update(conn, post_params) do
+    post =
+      Repo.one(
+        from(
+          p in Post,
+          where: p.id == ^post_params["id"],
+          left_join: tags in assoc(p, :tags),
+          preload: [tags: tags]
+        )
+      )
+
+    post = Post.changeset(post, post_params)
+
+    if post.valid? do
+      {:ok, post} = Repo.update(post)
+
+      post = Repo.preload(post, :tags)
+
+      conn
+      |> put_status(:ok)
+      |> put_resp_header("location", post_path(conn, :show, post))
+      |> render("show.json", post: post)
+    end
+  end
+
+
+  def delete(conn, %{"id" => id}) do
+    post = Repo.get!(Post, id)
+
+    case Repo.delete(post) do
+      {:ok, _something} -> json(conn, %{message: "I win"})
+      {:error, _changeset} -> json(conn, %{message: "I died"})
+    end
   end
 end

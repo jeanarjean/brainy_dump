@@ -1,13 +1,18 @@
 <template>
   <div class="tags-index">
-      <div v-for="tag in tags" :key="tag.id">
+      <div class="tag" v-for="tag in tags" :key="tag.id">
         <router-link :to="{ path: '/tags/' + tag.id}">
           <h1> {{tag.name}} </h1>
             <hr/>
         </router-link>
-          <div v-for="post in tag.posts" :key="post.id">
-            <h4> {{post.title}} </h4>
-            <div v-html="post.body"> </div>
+          <div v-if="tag.posts.length != 0">
+            <div v-if="tag.posts.length != 0" v-for="post in tag.posts" :key="post.id">
+              <h4> {{post.title}} </h4>
+              <div v-html="post.body"> </div>
+            </div>
+          </div>
+          <div v-else>
+              This tag doesn't have any post yet!
           </div>
       </div>
   </div>
@@ -30,3 +35,11 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.tag {
+  margin-bottom: 50px;
+}
+
+</style>
+

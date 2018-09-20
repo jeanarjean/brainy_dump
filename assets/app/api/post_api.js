@@ -20,4 +20,26 @@ export default {
             .catch(error => console.error('Error:', error))
             .then(response => callback(response))
     },
+    update_post(data, callback){
+        fetch('http://localhost:4000/api/posts/' + data.id, {
+            method: 'PUT',
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(res => res.json())
+            .catch(error => console.error('Error:', error))
+            .then(response => callback(response))
+    },
+    delete_post(data, callback){
+        fetch('http://localhost:4000/api/posts/' + data.id, {
+            method: 'DELETE',
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(res => res.json())
+            .catch(error => console.error('Error:', error))
+            .then(response => callback(response))
+    },
 }

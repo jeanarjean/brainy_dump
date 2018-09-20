@@ -3,8 +3,8 @@ defmodule BrainyDump.Repo.Migrations.CreatePostsTagsTable do
 
   def change do
     create table(:posts_tags, primary_key: false) do
-      add :tag_id, references(:tags, on_delete: :nothing), primary_key: true
-      add :post_id, references(:posts, on_delete: :nothing), primary_key: true
+      add :tag_id, references(:tags, on_delete: :delete_all), primary_key: true
+      add :post_id, references(:posts, on_delete: :delete_all), primary_key: true
     end
   end
 end

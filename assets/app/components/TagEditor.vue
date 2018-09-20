@@ -3,7 +3,7 @@
       <input class="tag-form-name" placeholder="Tag Name" v-model="data.name">
       <br/>
       <br/>
-      <button v-on:click="this.createTag">Send</button>
+      <button v-on:click="this.editTag">Send</button>
 
       <h1> {{response}} </h1>
   </div>
@@ -13,16 +13,16 @@
 import tag_api from "../api/tag_api";
 
 export default {
-  name: "tag-creator",
+  name: "tag-editor",
   data() {
     return {
       data: {},
-      response: {}
+      response: {},
     };
   },
   methods: {
-    createTag() {
-      tag_api.create_tag(this.data, response => {
+    editTag() {
+      tag_api.update_tag(this.data, response => {
         this.response = response;
       });
     }
@@ -36,6 +36,12 @@ export default {
     } else {
       next(false);
     }
+  },
+  mounted: function() {
+    var id = this.$route.params.id;
+    tag_api.get_tag(id, response => {
+      this.data = response;
+    });
   }
 };
 </script>
