@@ -3,11 +3,13 @@
       <div class="tag" v-for="tag in tags" :key="tag.id">
         <router-link :to="{ path: '/tags/' + tag.id}">
           <h1> {{tag.name}} </h1>
-            <hr/>
+          <hr/>
         </router-link>
           <div v-if="tag.posts.length != 0">
             <div v-if="tag.posts.length != 0" v-for="post in tag.posts" :key="post.id">
-              <h4> {{post.title}} </h4>
+              <router-link :to="{ name: 'Post', params: { id: post.id }}" class="see-post">
+                <h4> {{post.title}} </h4>
+              </router-link>
               <div v-html="post.body"> </div>
             </div>
           </div>

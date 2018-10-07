@@ -9,7 +9,7 @@
       <br/>
       <VueEditor class="body-editor" v-model="data.body"></VueEditor>
       <br/>
-      <button v-on:click="this.createPost">Send</button>
+      <button v-on:click="this.editPost">Send</button>
 
       <h1> {{response}} </h1>
     </div>
@@ -30,14 +30,13 @@ export default {
   },
   data() {
     return {
-      data: { tags: this.tag },
+      data: {},
       response: {}
     };
   },
   methods: {
-    createPost() {
-      console.log("asdasd");
-      post_api.create_post(this.data, response => {
+    editPost() {
+      post_api.update_post(this.data, response => {
         this.response = response;
       });
       this.$router.go(-1);
@@ -53,7 +52,13 @@ export default {
       next(false);
     }
   },
-
+  mounted: function() {
+    var id = this.$route.params.id;
+    post_api.get_post(id, response => {
+      console.log(response);
+      this.data = response;
+    });
+  }
 };
 </script>
 <style lang="scss">

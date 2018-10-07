@@ -78,7 +78,7 @@ defmodule BrainyDumpWeb.PostController do
         )
       )
 
-    render(conn, "show.json", post: post)
+    render(conn, "post_complete.json", post: post)
   end
 
   def update(conn, post_params) do

@@ -22,4 +22,13 @@ defmodule BrainyDumpWeb.TagView do
       inserted_at: tag.inserted_at
     }
   end
+
+  def render("tag_no_posts.json", %{tag: tag}) do
+    %{
+      id: tag.id,
+      name: tag.name,
+      updated_at: tag.updated_at,
+      inserted_at: tag.inserted_at
+    }
+  end
 end

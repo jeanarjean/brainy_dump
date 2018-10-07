@@ -1,26 +1,36 @@
 <template>
     <div class="sidebar-container">
       <div class="sidebar-content">
-        <router-link :to="{ path: '/tags/'}">
-          <h1> Tags </h1>
-        </router-link>
         <router-link :to="{ path: '/tags/new'}">
           <h1> New Tags </h1>
         </router-link>
-        <router-link :to="{ path: '/posts/'}">
+        <router-link :to="{ path: '/posts/new'}">
           <h1> New Posts </h1>
         </router-link>
+        <div class="tag" v-for="tag in tags" :key="tag.id">
+          <router-link :to="{ path: '/tags/' + tag.id}">
+            <h1> {{tag.name}} </h1>
+            <hr/>
+          </router-link>
+        </div>
       </div>
     </div>
 </template>
 
 <script>
+import tag_api from "../api/tag_api";
+
 export default {
   name: "sidebar-component",
   data() {
     return {
-      topic: {}
+      tags: []
     };
+  },
+  mounted: function() {
+    tag_api.get_tags(response => {
+      this.tags = response;
+    });
   }
 };
 </script>

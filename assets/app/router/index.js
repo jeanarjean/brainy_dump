@@ -9,6 +9,7 @@ import TagsIndex from '../components/TagsIndex';
 import PostCreator from '../components/PostCreator';
 import PostEditor from '../components/PostEditor';
 import Posts from '../components/Posts';
+import Post from '../components/Post';
 
 Vue.use(Router)
 
@@ -60,6 +61,11 @@ export default new Router({
                     path: 'edit/:id',
                     name: 'Edit Post',
                     component: PostEditor
+                },
+                {
+                    path: ':id',
+                    name: 'Post',
+                    component: Post
                 }
             ]
         }

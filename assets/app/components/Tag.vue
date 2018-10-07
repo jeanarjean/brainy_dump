@@ -12,7 +12,10 @@
       </div>
       <div class="post" v-for="post in tag.posts" :key="post.id">
         <div class="post-title">
-        <span class="post-title"> {{post.title?post.title:"Untitled"}} 
+        <span class="post-title"> 
+          <router-link :to="{ name: 'Post', params: { id: post.id }}" class="see-post">
+            {{post.title?post.title:"Untitled"}} 
+          </router-link>
           <router-link :to="{ name: 'Edit Post', params: { id: post.id }}" class="new-post">
             [edit]
           </router-link>
@@ -49,12 +52,21 @@ export default {
     this.id = this.$route.params.id;
     tag_api.get_tag(this.id, response => {
       this.tag = response;
-      console.log(this.tag.posts);
       this.tag.posts = this.tag.posts.sort(function(a, b) {
         return new Date(b.inserted_at) - new Date(a.inserted_at);
       });
       console.log(this.tag.posts);
     });
+  },
+  beforeRouteUpdate(to, from, next) {
+    this.id = to.params.id;
+    tag_api.get_tag(this.id, response => {
+      this.tag = response;
+      this.tag.posts = this.tag.posts.sort(function(a, b) {
+        return new Date(b.inserted_at) - new Date(a.inserted_at);
+      });
+    });
+    next();
   },
   methods: {
     formatDate(date) {
@@ -67,14 +79,6 @@ export default {
       );
       if (answer) {
         tag_api.delete_tag({ id: this.tag.id }, response => {
-          console.log(response);
-        });
-      }
-    },
-    editPost(id) {
-      const answer = window.confirm("Do you really want to delete this post?");
-      if (answer) {
-        post_api.editPost({ id: id }, response => {
           console.log(response);
         });
       }
