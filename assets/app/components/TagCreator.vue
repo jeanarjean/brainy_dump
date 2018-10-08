@@ -4,8 +4,6 @@
       <br/>
       <br/>
       <button v-on:click="this.createTag">Send</button>
-
-      <h1> {{response}} </h1>
   </div>
 </template>
 
@@ -28,13 +26,17 @@ export default {
     }
   },
   beforeRouteLeave(to, from, next) {
-    const answer = window.confirm(
-      "Do you really want to leave? you have unsaved changes!"
-    );
-    if (answer) {
-      next();
+    if (this.data.name) {
+      const answer = window.confirm(
+        "Do you really want to leave? you have unsaved changes!"
+      );
+      if (answer) {
+        next();
+      } else {
+        next(false);
+      }
     } else {
-      next(false);
+      next();
     }
   }
 };

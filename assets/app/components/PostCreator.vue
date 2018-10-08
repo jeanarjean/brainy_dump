@@ -7,24 +7,19 @@
       <input placeholder="Tags (at least one)" class="post-form-tags" v-model="data.tags">
       <br/>
       <br/>
-      <VueEditor class="body-editor" v-model="data.body"></VueEditor>
+      <quill-editor class="body-editor" v-model="data.body"/>
       <br/>
       <button v-on:click="this.createPost">Send</button>
-
-      <h1> {{response}} </h1>
     </div>
   </div>
 </template>
 
 <script>
 import post_api from "../api/post_api";
-import { VueEditor } from "vue2-editor";
 
 export default {
   name: "post-creator",
-  components: {
-    VueEditor
-  },
+  components: {},
   props: {
     tag: String
   },
@@ -44,19 +39,23 @@ export default {
     }
   },
   beforeRouteLeave(to, from, next) {
-    const answer = window.confirm(
-      "Do you really want to leave? you have unsaved changes!"
-    );
-    if (answer) {
-      next();
+    if (this.data.body || this.data.title) {
+      const answer = window.confirm(
+        "Do you really want to leave? you have unsaved changes!"
+      );
+      if (answer) {
+        next();
+      } else {
+        next(false);
+      }
     } else {
-      next(false);
+      next();
     }
-  },
-
+  }
 };
 </script>
-<style lang="scss">
+
+<style scoped lang="scss">
 .post-body {
   height: 70vh;
   width: 70vw;
@@ -68,7 +67,7 @@ export default {
   font-size: 40px;
   border: 0;
   text-decoration: underline;
-
+New
   &::-moz-placeholder {
     text-decoration: underline;
   }

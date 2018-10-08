@@ -1,16 +1,17 @@
 <template>
     <div class="sidebar-container">
       <div class="sidebar-content">
-        <router-link :to="{ path: '/tags/new'}">
-          <h1> New Tags </h1>
-        </router-link>
-        <router-link :to="{ path: '/posts/new'}">
-          <h1> New Posts </h1>
-        </router-link>
+        <div class="sidebar-header">
+          <router-link :to="{ path: '/tags/new'}">
+            <div class="sidebar-header-new"> New Tag </div>
+          </router-link>
+          <router-link :to="{ path: '/posts/new'}">
+            <div class="sidebar-header-new"> New Post </div>
+          </router-link>
+        </div>
         <div class="tag" v-for="tag in tags" :key="tag.id">
           <router-link :to="{ path: '/tags/' + tag.id}">
-            <h1> {{tag.name}} </h1>
-            <hr/>
+            <div class="sidebar-tag-name"> {{tag.name}} </div>
           </router-link>
         </div>
       </div>
@@ -35,7 +36,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped lang="scss">
 .sidebar-container {
   margin-top: 50px;
   text-align: right;
@@ -54,6 +55,34 @@ export default {
   border-radius: 2px; */
 }
 
-.sidebar-content {
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+}
+
+.sidebar-header-new {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-left: 2px;
+  margin-right: 8px;
+}
+
+.sidebar-header-new:hover {
+  background: rgba(0,0,0,0.12);
+}
+
+.sidebar-tag-name {
+  display: flex;
+  align-items: center;
+  font-size: .90rem;
+  height: 2rem;
+  margin-left: 2px;
+}
+
+.sidebar-tag-name:hover {
+  font-size: .90rem;
+  background: rgba(0,0,0,0.12);
 }
 </style>

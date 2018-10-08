@@ -3,12 +3,12 @@
     <div class="tag-content">
       <div class="tag-header">
         <span class="tag-title"> {{tag.name}}
-          <router-link :to="{ name: 'Edit Tag', params: { id: tag.id }}" class="new-post">
+          <router-link :to="{ name: 'Edit Tag', params: { id: tag.id }}" class="tag-action">
             [edit]
           </router-link>
-          <span v-on:click="this.deleteTag"> [delete] </span> 
+          <span class="tag-action" v-on:click="this.deleteTag"> [delete] </span> 
         </span>
-        <h2 v-if="tag.posts"> Last updated: {{tag.posts[0]?formatDate(tag.posts[0].updated_at):0}}</h2>
+        <h2 v-if="tag.posts"> Last updated: {{tag.posts[0]?date_formatter.formatDate(tag.posts[0].updated_at):date_formatter.formatDate(tag.updated_at)}}</h2>
       </div>
       <div class="post" v-for="post in tag.posts" :key="post.id">
         <div class="post-title">
@@ -16,15 +16,16 @@
           <router-link :to="{ name: 'Post', params: { id: post.id }}" class="see-post">
             {{post.title?post.title:"Untitled"}} 
           </router-link>
-          <router-link :to="{ name: 'Edit Post', params: { id: post.id }}" class="new-post">
+          <router-link :to="{ name: 'Edit Post', params: { id: post.id }}" class="post-action">
             [edit]
           </router-link>
-          <span v-on:click="deletePost(post.id)"> [delete] </span> </span>
-          <h2> {{formatDate(post.inserted_at)}} </h2>
+          <span class="post-action" v-on:click="deletePost(post.id)"> [delete] </span> </span>
+          <h2> {{date_formatter.formatDate(post.inserted_at)}} </h2>
         </div>
          <hr/>
         <div v-html="post.body">
         </div>
+        
       </div>
     </div>
     <div>
@@ -38,6 +39,7 @@
 <script>
 import tag_api from "../api/tag_api";
 import post_api from "../api/post_api";
+import date_formatter from "../utils/date_formatter";
 
 export default {
   name: "tag",
@@ -45,7 +47,8 @@ export default {
     return {
       id: {},
       tag: {},
-      posts: []
+      posts: [],
+      date_formatter: date_formatter
     };
   },
   mounted: function() {
@@ -69,10 +72,6 @@ export default {
     next();
   },
   methods: {
-    formatDate(date) {
-      var d = new Date(date);
-      return d.toDateString();
-    },
     deleteTag() {
       const answer = window.confirm(
         "Do you really want to delete the tag and all its posts?"
@@ -80,6 +79,7 @@ export default {
       if (answer) {
         tag_api.delete_tag({ id: this.tag.id }, response => {
           console.log(response);
+          // TODO GO SOMEWHERE ELSE
         });
       }
     },
@@ -88,6 +88,7 @@ export default {
       if (answer) {
         post_api.delete_post({ id: id }, response => {
           console.log(response);
+          this.$router.go();
         });
       }
     }
@@ -101,11 +102,20 @@ export default {
 }
 
 .tag-header {
+  font-size: .8rem;
   margin-bottom: 50px;
 }
 
 .tag-content {
   width: 100%;
+}
+
+.tag-action {
+  color: black;
+}
+
+.tag-action:hover {
+  cursor: pointer;
 }
 .new-post {
   font-size: 50px;
@@ -123,4 +133,13 @@ export default {
 .tag-title {
   font-size: 4rem;
 }
+
+.post-action {
+  color: black;
+
+}
+
+.post-action:hover {
+  cursor: pointer;
+} 
 </style>

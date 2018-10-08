@@ -14,11 +14,11 @@
   "keywords": [
     "pkb",
     "wiki",
-    "note taking",
-    "vue-router"
+    "note taking"
   ],
   "dependencies": {
     "vue": "^2.5",
+    "vue-quill-editor": "^3.0.6",
     "vue-router": "^3.0.1",
     "vue2-editor": "^2.6.6",
     "vuex": "^3.0.1",

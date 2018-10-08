@@ -7,23 +7,21 @@
       <input placeholder="Tags (at least one)" class="post-form-tags" v-model="data.tags">
       <br/>
       <br/>
-      <VueEditor class="body-editor" v-model="data.body"></VueEditor>
+      <quill-editor class="body-editor" v-model="data.body"/>
       <br/>
       <button v-on:click="this.editPost">Send</button>
-
-      <h1> {{response}} </h1>
     </div>
   </div>
 </template>
 
 <script>
 import post_api from "../api/post_api";
-import { VueEditor } from "vue2-editor";
+import { quillEditor } from 'vue-quill-editor';
 
 export default {
   name: "post-creator",
   components: {
-    VueEditor
+    quillEditor
   },
   props: {
     tag: String

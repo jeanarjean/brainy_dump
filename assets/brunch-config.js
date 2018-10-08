@@ -32,5 +32,8 @@ module.exports = {
     },
     paths: {
         public: '../priv/static'
+    },
+    npm: {
+        styles: {'quill': ['dist/quill.core.css', 'dist/quill.snow.css', 'dist/quill.bubble.css']}
     }
-}
+};

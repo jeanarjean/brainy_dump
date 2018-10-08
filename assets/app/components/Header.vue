@@ -2,9 +2,11 @@
     <div class="header-container">
       <div>
       </div>
-      <h1>
-        Brainy Dump
-      </h1>
+      <div class="header-title">
+        <router-link :to="{ name: 'Home'}" class="tag-action">
+          Brainy Dump
+        </router-link>
+      </div>
       <div class="options">
         ons
       </div>
@@ -22,7 +24,7 @@ export default {
 };
 </script>
 
-<style>
+<style <style lang="scss" scoped>
 .header-container {
   display: flex;
   justify-content: space-between;
@@ -35,6 +37,11 @@ export default {
 }
 
 .options {
-  font-size: 50px
+  font-size: 50px;
+}
+
+.header-title {
+  font-size: 2rem;
+  font-weight: 800;
 }
 </style>

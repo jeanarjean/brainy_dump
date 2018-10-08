@@ -4,8 +4,6 @@
       <br/>
       <br/>
       <button v-on:click="this.editTag">Send</button>
-
-      <h1> {{response}} </h1>
   </div>
 </template>
 
@@ -23,7 +21,7 @@ export default {
   methods: {
     editTag() {
       tag_api.update_tag(this.data, response => {
-        this.response = response;
+        this.respose = response;
       });
     }
   },
