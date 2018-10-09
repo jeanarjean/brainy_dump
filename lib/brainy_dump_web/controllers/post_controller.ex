@@ -9,7 +9,9 @@ defmodule BrainyDumpWeb.PostController do
   alias BrainyDumpWeb.PostTag
   import Ecto.Query, only: [from: 2]
   import Logger
+  plug(Ueberauth)
 
+  @spec index(Plug.Conn.t(), any()) :: Plug.Conn.t()
   def index(conn, _params) do
     posts =
       Repo.all(Post)
@@ -43,7 +45,9 @@ defmodule BrainyDumpWeb.PostController do
           )
         )
       end)
-    Logger.warn(inspect tags)
+
+    Logger.warn(inspect(tags))
+    Logger.warn(inspect(get_session(conn, :current_user)))
 
     post = Post.changeset(%Post{}, post_params, tags)
 
@@ -59,7 +63,7 @@ defmodule BrainyDumpWeb.PostController do
     else
       Logger.warn("Allo")
 
-      #TODO fix this
+      # TODO fix this
       conn
       |> put_status(:created)
       |> put_resp_header("location", post_path(conn, :show, post))
@@ -105,7 +109,6 @@ defmodule BrainyDumpWeb.PostController do
       |> render("show.json", post: post)
     end
   end
-
 
   def delete(conn, %{"id" => id}) do
     post = Repo.get!(Post, id)

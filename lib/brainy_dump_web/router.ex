@@ -1,5 +1,6 @@
 defmodule BrainyDumpWeb.Router do
   use BrainyDumpWeb, :router
+  require Ueberauth
 
   pipeline :browser do
     plug(:accepts, ["tml"])
@@ -11,6 +12,7 @@ defmodule BrainyDumpWeb.Router do
 
   pipeline :api do
     plug(:accepts, ["json"])
+    plug(:fetch_session)
   end
 
   scope "/", BrainyDumpWeb do
@@ -20,6 +22,15 @@ defmodule BrainyDumpWeb.Router do
     get("/", StaticPageController, :index)
     get("/posts/*wildcard", StaticPageController, :index)
     get("/tags/*wildcard", StaticPageController, :index)
+    get("/logout", AuthController, :logout)
+  end
+
+  scope "/auth", BrainyDumpWeb do
+    pipe_through(:browser)
+
+    get("/:provider", AuthController, :request)
+    get("/:provider/callback", AuthController, :callback)
+    post("/:provider/callback", AuthController, :callback)
   end
 
   scope "/api", BrainyDumpWeb do

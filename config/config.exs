@@ -14,8 +14,7 @@ config :brainy_dump, BrainyDumpWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "5z5s66hs3TUf47C4WaOYZwX5yzpj3C/RjZlOgxRifQTpY8IkZF4jNscSFTrwM9+G",
   render_errors: [view: BrainyDumpWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: BrainyDump.PubSub,
-           adapter: Phoenix.PubSub.PG2]
+  pubsub: [name: BrainyDump.PubSub, adapter: Phoenix.PubSub.PG2]
 
 # Configures Elixir's Logger
 config :logger, :console,
@@ -24,4 +23,16 @@ config :logger, :console,
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
-import_config "#{Mix.env}.exs"
+import_config "#{Mix.env()}.exs"
+
+# Configures Ueberauth
+config :ueberauth, Ueberauth,
+  providers: [
+    auth0: {Ueberauth.Strategy.Auth0, []}
+  ]
+
+# Configures Ueberauth's Auth0 auth provider
+config :ueberauth, Ueberauth.Strategy.Auth0.OAuth,
+  domain: System.get_env("AUTH0_DOMAIN"),
+  client_id: System.get_env("AUTH0_CLIENT_ID"),
+  client_secret: System.get_env("AUTH0_CLIENT_SECRET")

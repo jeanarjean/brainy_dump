@@ -8,6 +8,8 @@ defmodule BrainyDumpWeb.TagController do
   alias BrainyDumpWeb.Post
   import Ecto.Query, only: [from: 2]
 
+  plug(BrainyDumpWeb.Plugs.Ueberauth)
+
   def index(conn, _params) do
     tags =
       Repo.all(Tag)
