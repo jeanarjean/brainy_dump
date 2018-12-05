@@ -3,12 +3,7 @@
     <div class="app-container">
       <Header class="header"></Header>
       <div class="body">
-        <div class="body-container">
-          <router-view></router-view>
-        </div>
-      </div>
-      <div class="sidebar">
-        <Sidebar/>
+        <div class="body-container">Redirecting to Home Page.</div>
       </div>
     </div>
   </div>
@@ -16,13 +11,15 @@
 
 <script>
 import Header from "./Header";
-import Sidebar from "./Sidebar";
 
 export default {
-  name: "body",
+  name: "home",
   components: {
-    Header,
-    Sidebar
+    Header
+  },
+  mounted: function() {
+    this.$store.dispatch("SET_AUTH_TOKEN", this.$route.query.token);
+    this.$router.push("/");
   }
 };
 </script>
@@ -49,9 +46,9 @@ export default {
   display: grid;
   grid-template-areas:
     "header header header"
-    "sidebar body something"
+    "body body body"
     "footer footer footer";
-  grid-template-rows: 10vh 1fr 200px;
+  grid-template-rows: 20vh 1fr 200px;
   grid-template-columns: 550px 1fr 200px;
 }
 
@@ -67,4 +64,5 @@ export default {
   grid-area: header;
 }
 </style>
+
 

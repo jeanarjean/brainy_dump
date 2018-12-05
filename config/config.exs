@@ -25,13 +25,21 @@ config :logger, :console,
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"
 
-# Configures Ueberauth
+# # Configures Ueberauth's Auth0 auth provider
+# config :ueberauth, Ueberauth.Strategy.Auth0.OAuth,
+#   domain: System.get_env("AUTH0_DOMAIN"),
+#   client_id: System.get_env("AUTH0_CLIENT_ID"),
+#   client_secret: System.get_env("AUTH0_CLIENT_SECRET")
+
+config :brainy_dump, BrainyDump.Guardian,
+  issuer: "brainy_dump",
+  secret_key: System.get_env("GUARDIAN_SECRET")
+
 config :ueberauth, Ueberauth,
   providers: [
     auth0: {Ueberauth.Strategy.Auth0, []}
   ]
 
-# Configures Ueberauth's Auth0 auth provider
 config :ueberauth, Ueberauth.Strategy.Auth0.OAuth,
   domain: System.get_env("AUTH0_DOMAIN"),
   client_id: System.get_env("AUTH0_CLIENT_ID"),

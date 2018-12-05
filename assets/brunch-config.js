@@ -34,6 +34,9 @@ module.exports = {
         public: '../priv/static'
     },
     npm: {
-        styles: {'quill': ['dist/quill.core.css', 'dist/quill.snow.css', 'dist/quill.bubble.css']}
+        styles: {
+            'quill': ['dist/quill.core.css', 'dist/quill.snow.css', 'dist/quill.bubble.css'],
+            'vue-material': ['dist/vue-material.min.css', 'dist/theme/default.css']
+        }
     }
 };

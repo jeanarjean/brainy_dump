@@ -1,29 +1,16 @@
 <template>
   <div id="app">
-    <div class="app-container"> 
-      <Header class="header"> </Header>
-      <div class="body">
-        <Body>
-        </Body>
-      </div>
-      <div class="sidebar">
-        <Sidebar/>
-      </div>
-    </div>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import Header from "./components/Header";
-import Sidebar from "./components/Sidebar";
 import Body from "./components/Body";
 
 export default {
   name: "app",
   components: {
-    Header,
-    Body,
-    Sidebar
+    Body
   }
 };
 </script>
@@ -54,17 +41,20 @@ export default {
   grid-area: body;
 }
 
-
-.header {
+.header  {
   grid-area: header;
 }
 
 body {
   margin: 0;
-  font-family: 'Merriweather', serif;
+  font-family: "Merriweather", serif;
 }
 
-h1,  h2,  h3, h4, h5 {
+h1,
+h2,
+h3,
+h4,
+h5 {
   margin: 0;
 }
 

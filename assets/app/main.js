@@ -1,14 +1,20 @@
 import Vue from 'vue';
 import App from './App';
-import router from './router';
+import router from './router/router.js';
 import store from './store/store';
+import VueMaterial from 'vue-material'
+import { MdToolbar, MdButton, MdIcon } from 'vue-material/dist/components';
 import VueQuillEditor from 'vue-quill-editor';
+import VueCookies from 'vue-cookies';
 
-// require styles
+
+// Import Brunch CSS files from external librairies.
 import "vueify/lib/insert-css";
 import 'quill';
+import 'vue-material';
 
 Vue.config.productionTip = false;
+Vue.use(VueCookies);
 Vue.use(VueQuillEditor, {
     modules: {
         toolbar: [
@@ -28,6 +34,10 @@ Vue.use(VueQuillEditor, {
         ]
     }
 });
+Vue.use(MdToolbar);
+Vue.use(MdButton);
+Vue.use(MdIcon);
+
 
 /* eslint-disable no-new */
 new Vue({

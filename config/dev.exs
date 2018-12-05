@@ -64,3 +64,7 @@ config :brainy_dump, BrainyDump.Repo,
   database: "brainy_dump_dev",
   hostname: "localhost",
   pool_size: 10
+
+config :brainy_dump, BrainyDump.Guardian,
+  issuer: "brainy_dump",
+  secret_key: System.get_env("GUARDIAN_SECRET")

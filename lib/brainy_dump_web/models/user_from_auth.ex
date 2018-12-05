@@ -4,7 +4,6 @@ defmodule BrainyDumpWeb.UserFromAuth do
   """
   require Logger
   require Poison
-
   alias Ueberauth.Auth
 
   def find_or_create(%Auth{provider: :identity} = auth) do
@@ -19,19 +18,6 @@ defmodule BrainyDumpWeb.UserFromAuth do
 
   def find_or_create(%Auth{} = auth) do
     {:ok, basic_info(auth)}
-  end
-
-  # github does it this way
-  defp avatar_from_auth(%{info: %{urls: %{avatar_url: image}}}), do: image
-
-  # facebook does it this way
-  defp avatar_from_auth(%{info: %{image: image}}), do: image
-
-  # default case if nothing matches
-  defp avatar_from_auth(auth) do
-    Logger.warn(auth.provider <> " needs to find an avatar URL!")
-    Logger.debug(Poison.encode!(auth))
-    nil
   end
 
   defp basic_info(auth) do
@@ -51,6 +37,18 @@ defmodule BrainyDumpWeb.UserFromAuth do
         true -> Enum.join(name, " ")
       end
     end
+  end
+
+  # github does it this way
+  defp avatar_from_auth(%{info: %{urls: %{avatar_url: image}}}), do: image
+  # facebook does it this way
+  defp avatar_from_auth(%{info: %{image: image}}), do: image
+
+  # default case if nothing matches
+  defp avatar_from_auth(auth) do
+    Logger.warn(auth.provider <> " needs to find an avatar URL!")
+    Logger.debug(Poison.encode!(auth))
+    nil
   end
 
   defp validate_pass(%{other: %{password: ""}}) do

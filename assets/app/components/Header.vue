@@ -1,39 +1,46 @@
 <template>
-    <div class="header-container">
-      <div>
+  <div class="header-container">
+    <md-toolbar>
+      <div class="header-title" style="flex: 1">
+        <router-link :to="{ name: 'Home'}" class="tag-action">Brainy Dump</router-link>
       </div>
-      <div class="header-title">
-        <router-link :to="{ name: 'Home'}" class="tag-action">
-          Brainy Dump
-        </router-link>
+      <div v-if="!loggedIn">
+        <a href="/auth/auth0">
+          <md-button class="md-primary">Login</md-button>
+        </a>
       </div>
-      <div class="options">
-        ons
+      <div class="account" v-else>
+        <md-button class="md-icon-button md-raised md-primary">
+          <md-icon>person</md-icon>
+        </md-button>
+        <a href="/logout">
+          <md-button class="md-primary md-raised">Logout</md-button>
+        </a>
       </div>
-    </div>
+    </md-toolbar>
+  </div>
 </template>
 
 <script>
 export default {
   name: "header-component",
+  components: {},
   data() {
     return {
       topic: {}
     };
+  },
+  computed: {
+    loggedIn: function() {
+      return this.$store.state.auth_token != null;
+    }
   }
 };
 </script>
 
 <style <style lang="scss" scoped>
 .header-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100vw;
-  max-width: 100%;
-  height: 8vh;
   grid-area: header;
-  background-color: #fb0;
 }
 
 .options {
@@ -43,5 +50,8 @@ export default {
 .header-title {
   font-size: 2rem;
   font-weight: 800;
+}
+.account {
+  display: flex;
 }
 </style>

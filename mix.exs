@@ -20,7 +20,7 @@ defmodule BrainyDump.Mixfile do
   def application do
     [
       mod: {BrainyDump.Application, []},
-      extra_applications: [:logger, :runtime_tools, :ueberauth_auth0]
+      extra_applications: [:logger, :runtime_tools, :guardian, :ueberauth_auth0]
     ]
   end
 
@@ -41,6 +41,7 @@ defmodule BrainyDump.Mixfile do
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},
+      {:guardian, "~> 1.1"},
       {:ueberauth_auth0, "~> 0.3.0"}
     ]
   end

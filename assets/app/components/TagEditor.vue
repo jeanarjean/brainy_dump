@@ -15,7 +15,7 @@ export default {
   data() {
     return {
       data: {},
-      response: {},
+      response: {}
     };
   },
   methods: {

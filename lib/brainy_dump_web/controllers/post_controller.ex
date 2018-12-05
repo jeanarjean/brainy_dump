@@ -6,10 +6,8 @@ defmodule BrainyDumpWeb.PostController do
   alias BrainyDump.Repo
   alias BrainyDumpWeb.Post
   alias BrainyDumpWeb.Tag
-  alias BrainyDumpWeb.PostTag
   import Ecto.Query, only: [from: 2]
   import Logger
-  plug(Ueberauth)
 
   @spec index(Plug.Conn.t(), any()) :: Plug.Conn.t()
   def index(conn, _params) do
@@ -47,7 +45,6 @@ defmodule BrainyDumpWeb.PostController do
       end)
 
     Logger.warn(inspect(tags))
-    Logger.warn(inspect(get_session(conn, :current_user)))
 
     post = Post.changeset(%Post{}, post_params, tags)
 
