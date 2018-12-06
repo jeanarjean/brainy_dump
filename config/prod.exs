@@ -21,6 +21,18 @@ config :brainy_dump, BrainyDumpWeb.Endpoint,
 # Do not print debug messages in production
 config :logger, level: :info
 
+# Configure your database
+config :brainy_dump, BrainyDump.Repo,
+  username: System.get_env("POSTGRES_USERNAME")
+  password: System.get_env("POSTGRES_PASSWORD")
+  database: "brainy_dump_prod",
+  hostname: "localhost",
+  pool_size: 10
+
+config :brainy_dump, BrainyDump.Guardian,
+  issuer: "brainy_dump",
+  secret_key: System.get_env("GUARDIAN_SECRET")
+
 # ## SSL Support
 #
 # To get SSL working, you will need to add the `https` key

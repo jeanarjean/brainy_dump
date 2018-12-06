@@ -8,6 +8,6 @@ defmodule BrainyDump.Repo.Migrations.CreateTagsTable do
       timestamps()
     end
 
-    create unique_index(:tags, [:name])
+    create(unique_index(:tags, [:name]))
   end
 end

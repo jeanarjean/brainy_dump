@@ -1,5 +1,7 @@
 defmodule BrainyDump.Repo do
-  use Ecto.Repo, otp_app: :brainy_dump
+  use Ecto.Repo,
+    otp_app: :brainy_dump,
+    adapter: Ecto.Adapters.Postgres
 
   @doc """
   Dynamically loads the repository url from the

@@ -40,5 +40,6 @@ defmodule BrainyDumpWeb.Router do
 
     resources("/posts", PostController, except: [:new, :edit])
     resources("/tags", TagController, except: [:new, :edit])
+    resources("/users", UserController, except: [:new, :edit])
   end
 end
