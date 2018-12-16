@@ -32,7 +32,9 @@ export default {
   },
   computed: {
     loggedIn: function() {
-      return this.$store.state.auth_token != null;
+      return (
+        this.$store.state.auth_token != null && this.$store.state.auth_token
+      );
     }
   }
 };
