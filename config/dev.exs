@@ -64,6 +64,11 @@ config :brainy_dump, BrainyDump.Repo,
   hostname: "localhost",
   pool_size: 10
 
+config :ueberauth, Ueberauth.Strategy.Auth0.OAuth,
+  domain: System.get_env("AUTH0_DOMAIN"),
+  client_id: System.get_env("AUTH0_CLIENT_ID"),
+  client_secret: System.get_env("AUTH0_CLIENT_SECRET")
+
 config :brainy_dump, BrainyDump.Guardian,
   issuer: "brainy_dump",
   secret_key: System.get_env("GUARDIAN_SECRET")

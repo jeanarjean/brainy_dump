@@ -43,11 +43,9 @@ defmodule BrainyDumpWeb.AuthController do
   end
 
   def create_user_if_doesnt_exist(conn) do
-    Logger.warn(inspect(BrainyDump.Guardian.Plug.current_claims(conn)))
-
     user_id = BrainyDump.Guardian.Plug.current_claims(conn)["sub"]
 
-    unless(Repo.exists?(User, where: :id == user_id)) do
+    if Repo.get(User, user_id) == nil do
       user = User.changeset(%User{}, %{id: user_id})
       Repo.insert(user)
     end

@@ -17,7 +17,6 @@ defmodule BrainyDumpWeb.Tag do
     |> cast(params, ~w(name)a, [])
     |> validate_length(:name, max: 60)
     |> validate_required(:user)
-    |> unique_constraint(:name)
   end
 
   def changeset(tag, params, nil, user) do
@@ -25,7 +24,6 @@ defmodule BrainyDumpWeb.Tag do
     |> cast(params, ~w(name)a, [])
     |> put_assoc(:user, user)
     |> validate_length(:name, max: 60)
-    |> unique_constraint(:name)
     |> validate_required(:user)
   end
 
@@ -35,7 +33,6 @@ defmodule BrainyDumpWeb.Tag do
     |> put_assoc(:posts, posts)
     |> validate_length(:name, max: 60)
     |> validate_required(:user)
-    |> unique_constraint(:name)
   end
 
   def changeset(tag, params, posts, user) do
@@ -45,6 +42,5 @@ defmodule BrainyDumpWeb.Tag do
     |> put_assoc(:user, user)
     |> validate_length(:name, max: 60)
     |> validate_required(:user)
-    |> unique_constraint(:name)
   end
 end

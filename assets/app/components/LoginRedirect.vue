@@ -20,6 +20,7 @@ export default {
   mounted: function() {
     this.$store.dispatch("SET_AUTH_TOKEN", this.$route.query.token);
     this.$router.push("/");
+    location.reload();
   }
 };
 </script>

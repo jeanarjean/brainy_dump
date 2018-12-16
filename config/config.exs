@@ -12,6 +12,7 @@ config :brainy_dump,
 # Configures the endpoint
 config :brainy_dump, BrainyDumpWeb.Endpoint,
   url: [host: "localhost"],
+  # TO MOVE
   secret_key_base: "5z5s66hs3TUf47C4WaOYZwX5yzpj3C/RjZlOgxRifQTpY8IkZF4jNscSFTrwM9+G",
   render_errors: [view: BrainyDumpWeb.ErrorView, accepts: ~w(html json)],
   pubsub: [name: BrainyDump.PubSub, adapter: Phoenix.PubSub.PG2]
@@ -31,16 +32,7 @@ import_config "#{Mix.env()}.exs"
 #   client_id: System.get_env("AUTH0_CLIENT_ID"),
 #   client_secret: System.get_env("AUTH0_CLIENT_SECRET")
 
-config :brainy_dump, BrainyDump.Guardian,
-  issuer: "brainy_dump",
-  secret_key: System.get_env("GUARDIAN_SECRET")
-
 config :ueberauth, Ueberauth,
   providers: [
     auth0: {Ueberauth.Strategy.Auth0, []}
   ]
-
-config :ueberauth, Ueberauth.Strategy.Auth0.OAuth,
-  domain: System.get_env("AUTH0_DOMAIN"),
-  client_id: System.get_env("AUTH0_CLIENT_ID"),
-  client_secret: System.get_env("AUTH0_CLIENT_SECRET")

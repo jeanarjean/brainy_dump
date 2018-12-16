@@ -15,23 +15,11 @@ use Mix.Config
 # which you typically run after static files are built.
 config :brainy_dump, BrainyDumpWeb.Endpoint,
   load_from_system_env: true,
-  url: [host: "example.com", port: 80],
+  url: [host: "brainydump.com", port: 80],
   cache_static_manifest: "priv/static/cache_manifest.json"
 
 # Do not print debug messages in production
 config :logger, level: :info
-
-# Configure your database
-config :brainy_dump, BrainyDump.Repo,
-  username: System.get_env("POSTGRES_USERNAME")
-  password: System.get_env("POSTGRES_PASSWORD")
-  database: "brainy_dump_prod",
-  hostname: "localhost",
-  pool_size: 10
-
-config :brainy_dump, BrainyDump.Guardian,
-  issuer: "brainy_dump",
-  secret_key: System.get_env("GUARDIAN_SECRET")
 
 # ## SSL Support
 #
