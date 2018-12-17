@@ -2,13 +2,13 @@
   <div class="post-creator">
     <div class="post-creator-inner">
       <input placeholder="Title (optional)" class="post-form-title" v-model="data.title">
-      <br/>
-      <br/>
+      <br>
+      <br>
       <input placeholder="Tags (at least one)" class="post-form-tags" v-model="data.tags">
-      <br/>
-      <br/>
+      <br>
+      <br>
       <quill-editor class="body-editor" v-model="data.body"/>
-      <br/>
+      <br>
       <button v-on:click="this.editPost">Send</button>
     </div>
   </div>
@@ -16,7 +16,7 @@
 
 <script>
 import post_api from "../api/post_api";
-import { quillEditor } from 'vue-quill-editor';
+import { quillEditor } from "vue-quill-editor";
 
 export default {
   name: "post-creator",

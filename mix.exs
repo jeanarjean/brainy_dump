@@ -39,6 +39,7 @@ defmodule BrainyDump.Mixfile do
       {:plug_cowboy, "~> 1.0"},
       {:postgrex, ">= 0.0.0"},
       {:ecto_sql, "~> 3.0"},
+      {:cors_plug, "~> 2.0"},
       {:phoenix_html, "~> 2.10"},
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:gettext, "~> 0.11"},

@@ -11,6 +11,7 @@ defmodule BrainyDumpWeb.Router do
 
   pipeline :api do
     plug(:accepts, ["json"])
+    plug CORSPlug, origin: ["http://localhost:4000", "http://brainydump.com"]
     plug(:fetch_session)
   end
 

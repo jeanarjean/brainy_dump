@@ -2,14 +2,20 @@
   <div id="app">
     <div class="app-container">
       <Header class="header"></Header>
-      <div class="body">
-        <div class="body-container">
+      <div class="body md-layout md-gutter">
+        <div class="md-layout-item md-medium-size-33 md-small-size-50 md-xsmall-size-100">
+          <Sidebar/>
+        </div>
+        <div
+          class="md-layout-item md-medium-size-33 md-small-size-50 md-xsmall-size-100 md-size-70"
+        >
           <router-view></router-view>
         </div>
+        <div
+          class="md-layout-item md-medium-size-33 md-small-size-50 md-xsmall-size-100 md-size-10"
+        ></div>
       </div>
-      <div class="sidebar">
-        <Sidebar/>
-      </div>
+      <div class="footer"></div>
     </div>
   </div>
 </template>
@@ -30,33 +36,15 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.body-container {
-  margin-top: 50px;
-  background-color: white;
-  height: 70vh;
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2),
-    0 1px 5px 0 rgba(0, 0, 0, 0.12);
-  overflow: scroll;
-}
-
-.body-content {
-  margin-left: 20px;
-  margin-top: 20px;
-  height: 70vh;
-}
-
 .app-container {
+  height: 100vh;
   display: grid;
   grid-template-areas:
     "header header header"
-    "sidebar body something"
+    "body body body"
     "footer footer footer";
-  grid-template-rows: 10vh 1fr 200px;
+  grid-template-rows: 10vh 1fr 100px;
   grid-template-columns: 550px 1fr 200px;
-}
-
-.sidebar {
-  grid-area: sidebar;
 }
 
 .body {
@@ -65,6 +53,10 @@ export default {
 
 .header  {
   grid-area: header;
+}
+
+.footer  {
+  grid-area: footer;
 }
 </style>
 

@@ -1,9 +1,10 @@
 <template>
   <div class="tag-creator">
-      <input class="tag-form-name" placeholder="Tag Name" v-model="data.name">
-      <br/>
-      <br/>
-      <button v-on:click="this.editTag">Send</button>
+    <md-field class="input">
+      <label>Tag Name</label>
+      <md-input v-model="data.name"></md-input>
+      <md-button class="md-raised md-primary" v-on:click="this.editTag">Edit</md-button>
+    </md-field>
   </div>
 </template>
 
@@ -61,6 +62,21 @@ export default {
 
   &::-ms-input-placeholder {
     text-decoration: underline;
+  }
+}
+
+.input {
+  width: 700px;
+}
+@media only screen and (max-width: 600px) {
+  .input {
+    width: 300px;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .input {
+    width: 100vw;
   }
 }
 </style>

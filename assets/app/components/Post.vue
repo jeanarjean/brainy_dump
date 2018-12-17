@@ -1,15 +1,12 @@
 <template>
   <div class="post">
-      <div class="post-title">
-          {{post.title}}
-      </div>
-      <div class="post-date">
-          Created: {{date_formatter.formatDate(post.inserted_at)}}
-          <br>
-          Last Updated: {{date_formatter.formatDate(post.updated_at)}}
-      </div>
-      <div v-html="post.body" class="post-content">
-      </div>
+    <div class="post-title">{{post.title}}</div>
+    <div class="post-date">
+      Created: {{date_formatter.formatDate(post.inserted_at)}}
+      <br>
+      Last Updated: {{date_formatter.formatDate(post.updated_at)}}
+    </div>
+    <div v-html="post.body" class="post-content"></div>
   </div>
 </template>
 

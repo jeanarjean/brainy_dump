@@ -2,36 +2,54 @@
   <div class="tag">
     <div class="tag-content">
       <div class="tag-header">
-        <span class="tag-title"> {{tag.name}}
-          <router-link :to="{ name: 'Edit Tag', params: { id: tag.id }}" class="tag-action">
-            [edit]
+        <span class="md-display-1">
+          {{tag.name}}
+          <router-link :to="{ name: 'Edit Tag', params: { id: tag.id }}">
+            <md-button class="md-icon-button md-primary">
+              <md-icon>edit</md-icon>
+            </md-button>
           </router-link>
-          <span class="tag-action" v-on:click="this.deleteTag"> [delete] </span> 
+          <md-button class="md-icon-button md-primary" v-on:click="this.deleteTag">
+            <md-icon>delete</md-icon>
+          </md-button>
         </span>
-        <h2 v-if="tag.posts"> Last updated: {{tag.posts[0]?date_formatter.formatDate(tag.posts[0].updated_at):date_formatter.formatDate(tag.updated_at)}}</h2>
+        <br>
+        <span
+          class="md-subheading"
+          v-if="tag.posts"
+        >Last updated: {{tag.posts[0]?date_formatter.formatDate(tag.posts[0].updated_at):date_formatter.formatDate(tag.updated_at)}}</span>
       </div>
       <div class="post" v-for="post in tag.posts" :key="post.id">
         <div class="post-title">
-        <span class="post-title"> 
-          <router-link :to="{ name: 'Post', params: { id: post.id }}" class="see-post">
-            {{post.title?post.title:"Untitled"}} 
-          </router-link>
-          <router-link :to="{ name: 'Edit Post', params: { id: post.id }}" class="post-action">
-            [edit]
-          </router-link>
-          <span class="post-action" v-on:click="deletePost(post.id)"> [delete] </span> </span>
-          <h2> {{date_formatter.formatDate(post.inserted_at)}} </h2>
+          <span class="left-side-title">
+            <span class="md-title">
+              <router-link
+                :to="{ name: 'Post', params: { id: post.id }}"
+                class="see-post"
+              >{{post.title?post.title:"Untitled"}}</router-link>
+            </span>
+            <router-link :to="{ name: 'Edit Post', params: { id: post.id }}" class="post-action">
+              <md-button class="md-icon-button">
+                <md-icon>edit</md-icon>
+              </md-button>
+            </router-link>
+            <md-button class="md-icon-button" v-on:click="deletePost(post.id)">
+              <md-icon>delete</md-icon>
+            </md-button>
+          </span>
+          <span class="md-title">{{date_formatter.formatDate(post.inserted_at)}}</span>
         </div>
-         <hr/>
-        <div v-html="post.body">
-        </div>
-        
+        <hr>
+        <div v-html="post.body"></div>
       </div>
     </div>
     <div>
-       <router-link :to="{ name: 'New Post', params: { tag: tag.name }}" class="new-post">
-        +
-       </router-link>
+      <router-link :to="{ name: 'New Post', params: { tag: tag.name }}" class="new-post">
+        <md-button class="md-fab md-mini md-accent">
+          <md-icon>add</md-icon>
+          <!-- MOVE TO BOTTOM RIGHT -->
+        </md-button>
+      </router-link>
     </div>
   </div>
 </template>
@@ -102,16 +120,12 @@ export default {
 }
 
 .tag-header {
-  font-size: .8rem;
+  font-size: 0.8rem;
   margin-bottom: 50px;
 }
 
 .tag-content {
   width: 100%;
-}
-
-.tag-action {
-  color: black;
 }
 
 .tag-action:hover {
@@ -128,18 +142,19 @@ export default {
 .post-title {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
-.tag-title {
-  font-size: 4rem;
+.left-side-title {
+  display: flex;
+  align-items: center;
 }
 
 .post-action {
   color: black;
-
 }
 
 .post-action:hover {
   cursor: pointer;
-} 
+}
 </style>
