@@ -3,53 +3,48 @@
     <div class="tag-content">
       <div class="tag-header">
         <span class="md-display-1">
-          {{tag.name}}
-          <router-link :to="{ name: 'Edit Tag', params: { id: tag.id }}">
-            <md-button class="md-icon-button md-primary">
-              <md-icon>edit</md-icon>
-            </md-button>
-          </router-link>
-          <md-button class="md-icon-button md-primary" v-on:click="this.deleteTag">
-            <md-icon>delete</md-icon>
-          </md-button>
-        </span>
+              {{tag.name}}
+              <router-link :to="{ name: 'Edit Tag', params: { id: tag.id }}">
+                <md-button class="md-icon-button md-primary">
+                  <md-icon>edit</md-icon>
+                </md-button>
+              </router-link>
+              <md-button class="md-icon-button md-primary" v-on:click="this.deleteTag">
+                <md-icon>delete</md-icon>
+              </md-button>
+            </span>
         <br>
-        <span
-          class="md-subheading"
-          v-if="tag.posts"
-        >Last updated: {{tag.posts[0]?date_formatter.formatDate(tag.posts[0].updated_at):date_formatter.formatDate(tag.updated_at)}}</span>
+        <span class="md-subheading" v-if="tag.posts">Last updated: {{tag.posts[0]?date_formatter.formatDate(tag.posts[0].updated_at):date_formatter.formatDate(tag.updated_at)}}</span>
       </div>
       <div class="post" v-for="post in tag.posts" :key="post.id">
         <div class="post-title">
           <span class="left-side-title">
-            <span class="md-title">
-              <router-link
-                :to="{ name: 'Post', params: { id: post.id }}"
-                class="see-post"
-              >{{post.title?post.title:"Untitled"}}</router-link>
-            </span>
-            <router-link :to="{ name: 'Edit Post', params: { id: post.id }}" class="post-action">
-              <md-button class="md-icon-button">
-                <md-icon>edit</md-icon>
-              </md-button>
-            </router-link>
-            <md-button class="md-icon-button" v-on:click="deletePost(post.id)">
-              <md-icon>delete</md-icon>
+                <span class="md-title">
+                  <router-link
+                    :to="{ name: 'Post', params: { id: post.id }}"
+                    class="see-post"
+                  >{{post.title?post.title:"Untitled"}}</router-link>
+                </span>
+          <router-link :to="{ name: 'Edit Post', params: { id: post.id }}" class="post-action">
+            <md-button class="md-icon-button">
+              <md-icon>edit</md-icon>
             </md-button>
+          </router-link>
+          <md-button class="md-icon-button" v-on:click="deletePost(post.id)">
+            <md-icon>delete</md-icon>
+          </md-button>
           </span>
           <span class="md-title">{{date_formatter.formatDate(post.inserted_at)}}</span>
         </div>
         <hr>
         <div v-html="post.body"></div>
       </div>
-    </div>
-    <div>
-      <router-link :to="{ name: 'New Post', params: { tag: tag.name }}" class="new-post">
-        <md-button class="md-fab md-mini md-accent">
+      <div class="add-button">
+        <md-button class="md-fab md-accent" :to="{ name: 'New Post', params: {tag: tag.name}}">
           <md-icon>add</md-icon>
           <!-- MOVE TO BOTTOM RIGHT -->
         </md-button>
-      </router-link>
+      </div>
     </div>
   </div>
 </template>
@@ -95,24 +90,35 @@ export default {
         "Do you really want to delete the tag and all its posts?"
       );
       if (answer) {
-        tag_api.delete_tag({ id: this.tag.id }, response => {
-          console.log(response);
-          // TODO GO SOMEWHERE ELSE
-        });
+        tag_api.delete_tag(
+          {
+            id: this.tag.id
+          },
+          response => {
+            console.log(response);
+            // TODO GO SOMEWHERE ELSE
+          }
+        );
       }
     },
     deletePost(id) {
       const answer = window.confirm("Do you really want to delete this post?");
       if (answer) {
-        post_api.delete_post({ id: id }, response => {
-          console.log(response);
-          this.$router.go();
-        });
+        post_api.delete_post(
+          {
+            id: id
+          },
+          response => {
+            console.log(response);
+            this.$router.go();
+          }
+        );
       }
     }
   }
 };
 </script>
+
 <style <style lang="scss" scoped>
 .tag {
   display: flex;
@@ -131,6 +137,7 @@ export default {
 .tag-action:hover {
   cursor: pointer;
 }
+
 .new-post {
   font-size: 50px;
 }
@@ -156,5 +163,11 @@ export default {
 
 .post-action:hover {
   cursor: pointer;
+}
+
+.add-button {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
 }
 </style>

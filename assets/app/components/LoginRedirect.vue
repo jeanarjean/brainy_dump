@@ -3,7 +3,7 @@
     <div class="app-container">
       <Header class="header"></Header>
       <div class="body">
-        <div class="body-container">Redirecting to Home Page.</div>
+        <div class="body-container">Redirecting...</div>
       </div>
     </div>
   </div>
@@ -18,9 +18,15 @@ export default {
     Header
   },
   mounted: function() {
-    this.$store.dispatch("SET_AUTH_TOKEN", this.$route.query.token);
-    this.$router.push("/");
-    location.reload();
+    if (this.$route.query.loggedIn == 'true') {
+      this.$store.dispatch("SET_AUTH_TOKEN", this.$route.query.token);
+      this.$router.push("/app");
+      location.reload();
+    } else {
+      this.$store.dispatch("SET_AUTH_TOKEN", "");
+      this.$router.push("/");
+      location.reload();
+    }
   }
 };
 </script>

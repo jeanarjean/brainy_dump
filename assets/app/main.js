@@ -1,8 +1,8 @@
 import Vue from 'vue';
-import App from './App';
+import Main from './Main';
 import router from './router/router.js';
 import store from './store/store';
-import { MdToolbar, MdButton, MdIcon, MdField } from 'vue-material/dist/components';
+import { MdToolbar, MdButton, MdIcon, MdField, MdApp, MdContent, MdDrawer, MdList } from 'vue-material/dist/components';
 import VueMaterial from 'vue-material'
 import VueQuillEditor from 'vue-quill-editor';
 
@@ -35,6 +35,10 @@ Vue.use(MdToolbar);
 Vue.use(MdButton);
 Vue.use(MdIcon);
 Vue.use(MdField);
+Vue.use(MdApp);
+Vue.use(MdContent);
+Vue.use(MdDrawer);
+Vue.use(MdList);
 
 
 /* eslint-disable no-new */
@@ -42,5 +46,5 @@ new Vue({
     el: '#app',
     router,
     store,
-    render: h => h(App)
+    render: h => h(Main)
 });

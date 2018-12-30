@@ -39,7 +39,7 @@ defmodule BrainyDumpWeb.AuthController do
     conn
     |> put_flash(:info, "You have been logged out!")
     |> configure_session(drop: true)
-    |> redirect(to: "/login_redirect")
+    |> redirect(to: "/login_redirect?loggedIn=false")
   end
 
   def create_user_if_doesnt_exist(conn) do

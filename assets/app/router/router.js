@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from '../components/Home'
-import Body from '../components/Body'
+import StaticPages from '../components/StaticPages'
+import App from '../components/App'
 import Tag from '../components/Tag'
 import TagCreator from '../components/TagCreator';
 import TagEditor from '../components/TagEditor';
@@ -20,13 +20,13 @@ export default new Router({
     routes: [
         {
             path: '/',
-            name: 'Home',
-            component: Home
+            name: 'StaticPages',
+            component: StaticPages
         },
         {
             path: '/app',
-            name: 'Body',
-            component: Body,
+            name: 'App',
+            component: App,
             children: [
                 {
                     path: 'tags',
