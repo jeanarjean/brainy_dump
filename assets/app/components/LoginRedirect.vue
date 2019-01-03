@@ -10,13 +10,8 @@
 </template>
 
 <script>
-import Header from "./Header";
-
 export default {
   name: "home",
-  components: {
-    Header
-  },
   mounted: function() {
     if (this.$route.query.loggedIn == 'true') {
       this.$store.dispatch("SET_AUTH_TOKEN", this.$route.query.token);

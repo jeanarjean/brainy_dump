@@ -3,16 +3,16 @@
     <md-field class="input">
       <label>Tag Name</label>
       <md-input v-model="data.name"></md-input>
-      <md-button class="md-raised md-primary" v-on:click="this.createTag">Create</md-button>
+      <md-button class="md-raised md-primary" v-on:click="this.editTag">Edit</md-button>
     </md-field>
   </div>
 </template>
 
 <script>
-import tag_api from "../api/tag_api";
+import tag_api from "../../api/tag_api";
 
 export default {
-  name: "tag-creator",
+  name: "tag-editor",
   data() {
     return {
       data: {},
@@ -20,25 +20,27 @@ export default {
     };
   },
   methods: {
-    createTag() {
-      tag_api.create_tag(this.data, response => {
-        this.response = response;
+    editTag() {
+      tag_api.update_tag(this.data, response => {
+        this.respose = response;
       });
     }
   },
   beforeRouteLeave(to, from, next) {
-    if (this.data.name) {
-      const answer = window.confirm(
-        "Do you really want to leave? you have unsaved changes!"
-      );
-      if (answer) {
-        next();
-      } else {
-        next(false);
-      }
-    } else {
+    const answer = window.confirm(
+      "Do you really want to leave? you have unsaved changes!"
+    );
+    if (answer) {
       next();
+    } else {
+      next(false);
     }
+  },
+  mounted: function() {
+    var id = this.$route.params.id;
+    tag_api.get_tag(id, response => {
+      this.data = response;
+    });
   }
 };
 </script>

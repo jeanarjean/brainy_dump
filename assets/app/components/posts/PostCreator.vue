@@ -5,6 +5,8 @@
       <br/>
       <br/>
       <input placeholder="Tags (at least one)" class="post-form-tags" v-model="data.tags">
+      <TagAutoComplete v-model="data.tags">
+      </TagAutoComplete>
       <br/>
       <br/>
       <quill-editor class="body-editor" v-model="data.body"/>
@@ -15,11 +17,14 @@
 </template>
 
 <script>
-import post_api from "../api/post_api";
+import post_api from "../../api/post_api";
+import TagAutoComplete from "../generic-components/TagAutoComplete";
 
 export default {
   name: "post-creator",
-  components: {},
+  components: {
+    TagAutoComplete
+  },
   props: {
     tag: String
   },

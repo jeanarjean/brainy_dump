@@ -42,15 +42,14 @@ defmodule BrainyDumpWeb.PostController do
   end
 
   def create(conn, post_params, current_user) do
-    tag_list = String.split(post_params[:tags], " ")
-
+    tag_list = post_params[:tags]
     tags =
       tag_list
       |> Enum.map(fn tag ->
         Repo.one(
           from(
             t in user_tags(current_user),
-            where: t.name == ^tag
+            where: t.id == ^tag["id"]
           )
         )
       end)

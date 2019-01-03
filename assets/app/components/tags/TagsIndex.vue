@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import tag_api from "../api/tag_api";
+import tag_api from "../../api/tag_api";
 
 export default {
   name: "Tags",
@@ -42,6 +42,5 @@ export default {
 .tag {
   margin-bottom: 50px;
 }
-
 </style>
 

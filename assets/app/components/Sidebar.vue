@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import tag_api from "../api/tag_api";
+import tag_api from "../../api/tag_api";
 
 export default {
   name: "sidebar-component",

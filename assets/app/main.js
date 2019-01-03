@@ -5,6 +5,7 @@ import store from './store/store';
 import { MdToolbar, MdButton, MdIcon, MdField, MdApp, MdContent, MdDrawer, MdList } from 'vue-material/dist/components';
 import VueMaterial from 'vue-material'
 import VueQuillEditor from 'vue-quill-editor';
+import VueTagsInput from '@johmun/vue-tags-input';
 
 import "vueify/lib/insert-css";
 import 'quill';

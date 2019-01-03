@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import post_api from "../api/post_api";
+import post_api from "../../api/post_api";
 import { quillEditor } from "vue-quill-editor";
 
 export default {

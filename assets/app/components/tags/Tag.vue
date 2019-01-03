@@ -50,9 +50,9 @@
 </template>
 
 <script>
-import tag_api from "../api/tag_api";
-import post_api from "../api/post_api";
-import date_formatter from "../utils/date_formatter";
+import tag_api from "../../api/tag_api";
+import post_api from "../../api/post_api";
+import date_formatter from "../../utils/date_formatter";
 
 export default {
   name: "tag",

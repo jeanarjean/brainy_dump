@@ -11,8 +11,8 @@
 </template>
 
 <script>
-import post_api from "../api/post_api";
-import date_formatter from "../utils/date_formatter";
+import post_api from "../../api/post_api";
+import date_formatter from "../../utils/date_formatter";
 
 export default {
   name: "tag",

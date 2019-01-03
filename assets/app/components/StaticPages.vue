@@ -33,36 +33,34 @@
 </template>
 
 <script>
-  import Header from "./Header";
-  import Sidebar from "./Sidebar";
-  
-  export default {
-    name: "static-pages",
-    data: () => ({
-      menuVisible: false
-    }),
-    components: {
-      Header,
-      Sidebar
-    },
-    computed: {
-      loggedIn: function() {
-        return (
-          this.$store.state.auth_token != null && this.$store.state.auth_token
-        );
-      }
+import Sidebar from "./Sidebar";
+
+export default {
+  name: "static-pages",
+  data: () => ({
+    menuVisible: false
+  }),
+  components: {
+    Sidebar
+  },
+  computed: {
+    loggedIn: function() {
+      return (
+        this.$store.state.auth_token != null && this.$store.state.auth_token
+      );
     }
-  };
+  }
+};
 </script>
 
 };
 </script>
 
 <style lang="scss" scoped>
-  .md-app {
-    height: 100vh;
-    border: 1px solid rgba(#000, 0.12);
-  }
+.md-app {
+  height: 100vh;
+  border: 1px solid rgba(#000, 0.12);
+}
 </style>
 
 
