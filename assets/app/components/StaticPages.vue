@@ -34,7 +34,7 @@
 
           <md-card-content>Brainy Dump is a note taking / journaling application that allows to journal different facets of your life.</md-card-content>
           <md-card-actions>
-            <md-button class="md-accent md-raised" :to="{ name: 'App'}">Access App</md-button>
+            <md-button class="md-accent md-raised" :to="{ name: 'AppHome'}">Access App</md-button>
           </md-card-actions>
         </md-card>
       </md-app-content>

@@ -2,7 +2,6 @@ defmodule BrainyDumpWeb.TagView do
   use BrainyDumpWeb, :view
 
   alias BrainyDumpWeb.TagView
-  alias BrainyDumpWeb.Post
   require Logger
 
   def render("index.json", %{tags: tags}) do
@@ -28,7 +27,6 @@ defmodule BrainyDumpWeb.TagView do
     %{
       id: tag.id,
       name: tag.name,
-      parent: tag.parent,
       updated_at: tag.updated_at,
       inserted_at: tag.inserted_at
     }

@@ -4,11 +4,10 @@
       <input placeholder="Title (optional)" class="post-form-title" v-model="data.title">
       <br>
       <br>
-      <TagAutoComplete v-model="data.tags"></TagAutoComplete>
+      <TagAutoComplete :init="this.tag" v-model="data.tags"></TagAutoComplete>
       <br>
       <br>
       <quill-editor class="body-editor" v-model="data.body"/>
-      <div class="spacer"></div>
       <button v-on:click="this.createPost">Send</button>
     </div>
   </div>
@@ -24,13 +23,16 @@ export default {
     TagAutoComplete
   },
   props: {
-    tag: String
+    tag: Object
   },
   data() {
     return {
-      data: { tags: this.tag },
+      data: { tags: "" },
       response: {}
     };
+  },
+  mounted() {
+    console.log(this.tag);
   },
   methods: {
     createPost() {
@@ -57,7 +59,7 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .post-form-title {
   height: 40px;
   width: 100%;
@@ -84,10 +86,11 @@ export default {
 }
 
 .body-editor {
-  height: 65vh;
+  margin-bottom: 2vh;
 }
 
-.spacer {
-  height: 7vh;
+.ql-container {
+  height: 60vh;
 }
+
 </style>

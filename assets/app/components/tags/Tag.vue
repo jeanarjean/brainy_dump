@@ -28,7 +28,7 @@
                 class="see-post"
               >{{post.title?post.title:"Untitled"}}</router-link>
             </span>
-            <router-link :to="{ name: 'Edit Post', params: { id: post.id }}" class="post-action">
+            <router-link :to="{ name: 'Edit Post', params: { id: post.id}}" class="post-action">
               <md-button class="md-icon-button">
                 <md-icon>edit</md-icon>
               </md-button>
@@ -44,7 +44,7 @@
       </div>
       <div class="add-button">
         <div></div>
-        <md-button class="md-fab md-accent" :to="{ name: 'New Post', params: {tag: tag.id}}">
+        <md-button class="md-fab md-accent" :to="{ name: 'New Post', params: {tag: tag}}">
           <md-icon>add</md-icon>
         </md-button>
       </div>

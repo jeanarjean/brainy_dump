@@ -16,14 +16,14 @@ import tag_api from "../../api/tag_api";
 
 export default {
   name: "tag-auto-complete",
-  props: ["value", "max_tags"],
+  props: ["value", "max_tags", "init"],
   components: {
     VueTagsInput
   },
   data() {
     return {
       tag: this.value,
-      tags: [],
+      tags: this.init?[{id: this.init.id, text: this.init.name}]:[],
       autocompleteItems: [],
       debounce: null
     };

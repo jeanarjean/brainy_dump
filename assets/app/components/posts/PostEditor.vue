@@ -4,7 +4,7 @@
       <input placeholder="Title (optional)" class="post-form-title" v-model="data.title">
       <br>
       <br>
-      <TagAutoComplete v-model="data.tags"></TagAutoComplete>
+      <TagAutoComplete :init="data.tags" v-model="data.tags"></TagAutoComplete>
       <br>
       <br>
       <quill-editor class="body-editor" v-model="data.body"/>
@@ -24,9 +24,6 @@ export default {
   components: {
     quillEditor,
     TagAutoComplete
-  },
-  props: {
-    tag: String
   },
   data() {
     return {
@@ -55,7 +52,6 @@ export default {
   mounted: function() {
     var id = this.$route.params.id;
     post_api.get_post(id, response => {
-      console.log(response);
       this.data = response;
     });
   }
@@ -114,5 +110,11 @@ export default {
 }
 
 .body-editor {
+  margin-bottom: 2vh;
 }
+
+.ql-container {
+  height: 60vh;
+}
+
 </style>

@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import StaticPages from '../components/StaticPages'
 import App from '../components/App'
+import AppHome from '../components/AppHome'
 import Tag from '../components/tags/Tag'
 import TagCreator from '../components/tags/TagCreator';
 import TagEditor from '../components/tags/TagEditor';
@@ -28,6 +29,11 @@ export default new Router({
             name: 'App',
             component: App,
             children: [
+                {
+                    path: '/',
+                    name: 'AppHome',
+                    component: AppHome,
+                },
                 {
                     path: 'tags',
                     component: Tags,
@@ -62,7 +68,8 @@ export default new Router({
                         {
                             path: 'new',
                             name: 'New Post',
-                            component: PostCreator
+                            component: PostCreator,
+                            props: true
                         },
                         {
                             path: 'edit/:id',
@@ -72,7 +79,8 @@ export default new Router({
                         {
                             path: ':id',
                             name: 'Post',
-                            component: Post
+                            component: Post,
+                            props: true
                         }
                     ]
                 }]
