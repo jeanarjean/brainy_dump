@@ -2,11 +2,11 @@ import Vue from 'vue';
 import Main from './Main';
 import router from './router/router.js';
 import store from './store/store';
-import { MdToolbar, MdButton, MdIcon, MdField, MdApp, MdContent, MdDrawer, MdList } from 'vue-material/dist/components';
+import { MdToolbar, MdButton, MdIcon, MdField, MdApp, MdContent, MdDrawer, MdList, MdCard } from 'vue-material/dist/components';
 import VueMaterial from 'vue-material'
 import VueQuillEditor from 'vue-quill-editor';
 import VueTagsInput from '@johmun/vue-tags-input';
-
+import { TreeView } from "@bosket/vue"
 import "vueify/lib/insert-css";
 import 'quill';
 import 'vue-material';
@@ -40,6 +40,7 @@ Vue.use(MdApp);
 Vue.use(MdContent);
 Vue.use(MdDrawer);
 Vue.use(MdList);
+Vue.use(MdCard);
 
 
 /* eslint-disable no-new */

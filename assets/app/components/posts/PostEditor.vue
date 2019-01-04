@@ -4,7 +4,7 @@
       <input placeholder="Title (optional)" class="post-form-title" v-model="data.title">
       <br>
       <br>
-      <input placeholder="Tags (at least one)" class="post-form-tags" v-model="data.tags">
+      <TagAutoComplete v-model="data.tags"></TagAutoComplete>
       <br>
       <br>
       <quill-editor class="body-editor" v-model="data.body"/>
@@ -16,12 +16,14 @@
 
 <script>
 import post_api from "../../api/post_api";
+import TagAutoComplete from "../generic-components/TagAutoComplete";
 import { quillEditor } from "vue-quill-editor";
 
 export default {
   name: "post-creator",
   components: {
-    quillEditor
+    quillEditor,
+    TagAutoComplete
   },
   props: {
     tag: String

@@ -18,6 +18,7 @@ defmodule BrainyDumpWeb.TagView do
       id: tag.id,
       name: tag.name,
       posts: render_many(tag.posts, BrainyDumpWeb.PostView, "post.json"),
+      parent: tag.parent,
       updated_at: tag.updated_at,
       inserted_at: tag.inserted_at
     }
@@ -27,6 +28,7 @@ defmodule BrainyDumpWeb.TagView do
     %{
       id: tag.id,
       name: tag.name,
+      parent: tag.parent,
       updated_at: tag.updated_at,
       inserted_at: tag.inserted_at
     }

@@ -16,6 +16,9 @@
     "note taking"
   ],
   "dependencies": {
+    "@bosket/core": "^0.4.4",
+    "@bosket/tools": "^0.4.4",
+    "@bosket/vue": "^0.4.4",
     "@johmun/vue-tags-input": "^2.0.0",
     "axios": "^0.18.0",
     "vue": "^2.5",

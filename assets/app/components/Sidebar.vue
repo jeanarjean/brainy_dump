@@ -1,13 +1,13 @@
 <template>
-<div>
-        <md-toolbar class="md-transparent bold" md-elevation="0">
-          Tags
-        </md-toolbar>
-  <md-list>
-    <md-list-item v-for="tag in tags" :key="tag.id" :to="{name: 'Tag',params: {id: tag.id}}">
-      {{tag.name}}
-    </md-list-item>
-  </md-list>
+  <div>
+    <md-toolbar class="md-transparent bold" md-elevation="0">Tags</md-toolbar>
+    <md-list>
+      <md-list-item
+        v-for="tag in tags"
+        :key="tag.id"
+        :to="{name: 'Tag',params: {id: tag.id}}"
+      >{{tag.name}}</md-list-item>
+    </md-list>
   </div>
 </template>
 

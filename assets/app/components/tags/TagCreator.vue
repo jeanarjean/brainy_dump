@@ -4,15 +4,20 @@
       <label>Tag Name</label>
       <md-input v-model="data.name"></md-input>
       <md-button class="md-raised md-primary" v-on:click="this.createTag">Create</md-button>
+      <TagAutoComplete v-model="data.parent" max_tags="1"></TagAutoComplete>
     </md-field>
   </div>
 </template>
 
 <script>
 import tag_api from "../../api/tag_api";
+import TagAutoComplete from "../generic-components/TagAutoComplete";
 
 export default {
   name: "tag-creator",
+  components: {
+    TagAutoComplete
+  },
   data() {
     return {
       data: {},
@@ -21,6 +26,7 @@ export default {
   },
   methods: {
     createTag() {
+      this.data.parent = this.data.parent[0];
       tag_api.create_tag(this.data, response => {
         this.response = response;
       });

@@ -22,7 +22,11 @@ defmodule BrainyDumpWeb.TagController do
   def index(conn, _params, current_user) do
     tags =
       Repo.all(user_tags(current_user))
-      |> Enum.map(fn tag -> Repo.preload(tag, :posts) end)
+      |> Enum.map(fn tag ->
+        tag
+        |> Repo.preload(:posts)
+        |> Repo.preload(:parent)
+      end)
 
     render(conn, "index.json", tags: tags)
   end
@@ -38,42 +42,14 @@ defmodule BrainyDumpWeb.TagController do
         )
       )
 
+    tag =
+      tag
+      |> Repo.preload(:parent)
+
     render(conn, "show.json", tag: tag)
   end
 
   def create(conn, tag_params, current_user)
-
-  def create(conn, tag_params = %{"posts" => posts}, current_user) do
-    posts =
-      posts
-      |> Enum.map(fn post ->
-        Repo.one(
-          from(
-            p in Post,
-            where: p.id == ^post["id"]
-          )
-        )
-      end)
-
-    tag = Tag.changeset(%Tag{}, tag_params, posts, current_user)
-
-    if tag.valid? do
-      {:ok, tag} = Repo.insert(tag)
-
-      tag = Repo.preload(tag, :posts)
-
-      conn
-      |> put_status(:created)
-      |> put_resp_header("location", tag_path(conn, :show, tag))
-      |> render("show.json", tag: tag)
-    end
-
-    # to fix if fail
-    conn
-    |> put_status(:created)
-    |> put_resp_header("location", tag_path(conn, :show, tag))
-    |> render("show.json", tag: tag)
-  end
 
   def create(conn, tag_params, current_user) do
     tag = Tag.changeset(%Tag{}, tag_params, nil, current_user)

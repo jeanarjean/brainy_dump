@@ -3,8 +3,9 @@
     <vue-tags-input
       v-model="tag"
       :tags="tags"
-      :autocomplete-items="autocompleteItems"
+      :autocomplete-items="filteredItems"
       :add-only-from-autocomplete="true"
+      :max_tags="this.max_tags"
       @tags-changed="update"
     />
   </div>
@@ -15,7 +16,7 @@ import tag_api from "../../api/tag_api";
 
 export default {
   name: "tag-auto-complete",
-  props: ["value"],
+  props: ["value", "max_tags"],
   components: {
     VueTagsInput
   },
@@ -43,12 +44,18 @@ export default {
       this.debounce = setTimeout(() => {
         tag_api.get_tags(response => {
           console.log(response);
-          this.autocompleteItems = 
-          response.map(a => {
+          this.autocompleteItems = response.map(a => {
             return { text: a.name, id: a.id };
           });
         });
       }, 600);
+    }
+  },
+  computed: {
+    filteredItems() {
+      return this.autocompleteItems.filter(i => {
+        return i.text.toLowerCase().indexOf(this.tag.toLowerCase()) !== -1;
+      });
     }
   }
 };

@@ -5,37 +5,35 @@
         <md-button v-if="isMobile" class="md-icon-button" @click="menuVisible = !menuVisible">
           <md-icon>menu</md-icon>
         </md-button>
-  
+
         <div class="header-title" style="flex: 1;">
-          <router-link :to="{ name: 'StaticPages'}" class="md-primary-alternate" style="color: white;">
+          <router-link
+            :to="{ name: 'StaticPages'}"
+            class="md-primary-alternate"
+            style="color: white;"
+          >
             <span class="md-title">Brainy Dump</span>
           </router-link>
         </div>
         <div v-if="!loggedIn">
           <a href="/auth/auth0">
-            <md-button class="md-accent md-raised">Login</md-button>
+            <md-button class="md-accent md-raised">Login/Sign Up</md-button>
           </a>
         </div>
         <div class="account" v-else>
           <!-- <md-button class="md-icon-button md-raised md-primary">
                       <md-icon>person</md-icon>
-                    </md-button>-->
+          </md-button>-->
           <a href="/logout">
             <md-button class="md-accent md-raised">Logout</md-button>
           </a>
         </div>
-  
       </md-app-toolbar>
-      <md-app-drawer v-if="isMobile" :md-active.sync="menuVisible">
-        <Sidebar />
+      <md-app-drawer :md-permanent="isClipped" :md-active.sync="menuVisible">
+        <Sidebar/>
       </md-app-drawer>
-
-      <md-app-drawer v-if="!isMobile" md-permanent="clipped">
-        <Sidebar />
-      </md-app-drawer>
-
-      <md-app-content>
-        <router-view> </router-view>
+      <md-app-content md-scrollbar="true">
+        <router-view></router-view>
       </md-app-content>
     </md-app>
   </div>
@@ -64,6 +62,12 @@ export default {
         return true;
       }
       return false;
+    },
+    isClipped() {
+      if (!this.isMobile) {
+        return "clipped";
+      }
+      return null;
     }
   },
   mounted() {
