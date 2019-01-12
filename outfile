@@ -1,0 +1,398 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 11.1 (Debian 11.1-1.pgdg90+1)
+-- Dumped by pg_dump version 11.1 (Ubuntu 11.1-1.pgdg18.04+1)
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: posts; Type: TABLE; Schema: public; Owner: bitch
+--
+
+CREATE TABLE public.posts (
+    id bigint NOT NULL,
+    title character varying(255),
+    body text,
+    inserted_at timestamp(0) without time zone NOT NULL,
+    updated_at timestamp(0) without time zone NOT NULL,
+    user_id character varying(255)
+);
+
+
+ALTER TABLE public.posts OWNER TO bitch;
+
+--
+-- Name: posts_id_seq; Type: SEQUENCE; Schema: public; Owner: bitch
+--
+
+CREATE SEQUENCE public.posts_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.posts_id_seq OWNER TO bitch;
+
+--
+-- Name: posts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: bitch
+--
+
+ALTER SEQUENCE public.posts_id_seq OWNED BY public.posts.id;
+
+
+--
+-- Name: posts_tags; Type: TABLE; Schema: public; Owner: bitch
+--
+
+CREATE TABLE public.posts_tags (
+    tag_id bigint NOT NULL,
+    post_id bigint NOT NULL
+);
+
+
+ALTER TABLE public.posts_tags OWNER TO bitch;
+
+--
+-- Name: schema_migrations; Type: TABLE; Schema: public; Owner: bitch
+--
+
+CREATE TABLE public.schema_migrations (
+    version bigint NOT NULL,
+    inserted_at timestamp(0) without time zone
+);
+
+
+ALTER TABLE public.schema_migrations OWNER TO bitch;
+
+--
+-- Name: tags; Type: TABLE; Schema: public; Owner: bitch
+--
+
+CREATE TABLE public.tags (
+    id bigint NOT NULL,
+    name character varying(255),
+    inserted_at timestamp(0) without time zone NOT NULL,
+    updated_at timestamp(0) without time zone NOT NULL,
+    user_id character varying(255),
+    parent_id integer
+);
+
+
+ALTER TABLE public.tags OWNER TO bitch;
+
+--
+-- Name: tags_id_seq; Type: SEQUENCE; Schema: public; Owner: bitch
+--
+
+CREATE SEQUENCE public.tags_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.tags_id_seq OWNER TO bitch;
+
+--
+-- Name: tags_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: bitch
+--
+
+ALTER SEQUENCE public.tags_id_seq OWNED BY public.tags.id;
+
+
+--
+-- Name: users; Type: TABLE; Schema: public; Owner: bitch
+--
+
+CREATE TABLE public.users (
+    id character varying(255) NOT NULL,
+    first_name character varying(255),
+    last_name character varying(255),
+    email character varying(255),
+    inserted_at timestamp(0) without time zone NOT NULL,
+    updated_at timestamp(0) without time zone NOT NULL
+);
+
+
+ALTER TABLE public.users OWNER TO bitch;
+
+--
+-- Name: posts id; Type: DEFAULT; Schema: public; Owner: bitch
+--
+
+ALTER TABLE ONLY public.posts ALTER COLUMN id SET DEFAULT nextval('public.posts_id_seq'::regclass);
+
+
+--
+-- Name: tags id; Type: DEFAULT; Schema: public; Owner: bitch
+--
+
+ALTER TABLE ONLY public.tags ALTER COLUMN id SET DEFAULT nextval('public.tags_id_seq'::regclass);
+
+
+--
+-- Data for Name: posts; Type: TABLE DATA; Schema: public; Owner: bitch
+--
+
+COPY public.posts (id, title, body, inserted_at, updated_at, user_id) FROM stdin;
+2	\N	<p>Life is good ,hard to see it right now, but I only have two exams left</p><p>I'm afraid I'm gonna be left out during winter break.</p><p>Had a dream where we went on vacation in club med and everyone was boring to death and I was so afraid I was wasting time and money there.</p>	2018-12-13 17:34:42	2018-12-13 17:34:42	auth0|5bc3ab1847655345115b38be
+3	\N	<p>I don't deserve you</p><p>You deserve better</p><p>J'ai jamais vu tes peurs s'éteindre dans mes mains.</p>	2018-12-14 17:55:03	2018-12-14 17:55:03	auth0|5bc3ab1847655345115b38be
+4	Debugging scss	<p>Seems brunch isn't able to resolve the module I want in the node_module css for vue-material</p>	2018-12-17 15:29:51	2018-12-17 15:29:51	auth0|5bc3ab1847655345115b38be
+11	\N	<p>I should stop focusing so much on others</p><p>There's no point thinking about what they're thinking</p><p>About why they're doing what they're doing.</p>	2018-12-19 05:11:03	2018-12-19 05:11:03	auth0|5bc3ab1847655345115b38be
+7	Belmonts	<p>Get under their ass after reflecting their shit. They shield a lot.</p>	2018-12-17 22:38:06	2018-12-17 22:38:06	auth0|5bc3ab1847655345115b38be
+6	idea	<p>Put edit and delete into standard buttons</p><p><br></p><p>Yes.</p>	2018-12-17 21:26:30	2018-12-18 00:26:15	auth0|5bc3ab1847655345115b38be
+5	Falco 1	<p>Gotta learn how to nair into combo</p><p>Gotta learn how to properly punish rollers (overshoot)</p><p>Gotta flowchart better killmoves</p><p><br></p><p>bait into the bAir can be a thing</p><p>don't use anything except nair and dair into small characters, won't hit otherwise</p><p><br></p><p>dtilt can kill light characters at 140%ish, nvm it doesn't kill puff, yikes</p><p><strong>EDIT:</strong></p><p>Gotta learn how to use my nair</p><p>Learn what to do when dude behind me on shield.</p>	2018-12-17 21:14:04	2018-12-18 18:25:55	auth0|5bc3ab1847655345115b38be
+12	\N	<p>Continuation of yday, I really should focus on the now more</p><p>There's absolutely no point in thinking about others.</p><p><br></p><p>Listen to .paak more</p>	2018-12-19 15:58:34	2018-12-19 15:59:04	auth0|5bc3ab1847655345115b38be
+18	Hardships	<p>Life is about embracing hardships for their learning potential and excitement</p><p>Not feeling sorry for yourself</p><p><br></p><p>Exhaustion &gt; Boredom</p><p><br></p><p>Longing for being in the same place you were when you last felt good isn't the answer.</p><p>You'll only be truly happy if you accept where you're at right now.</p><p>There's no running,</p><p>Just acceptance.</p><p>You should still run more my J.</p>	2018-12-26 03:53:56	2018-12-26 05:13:06	auth0|5bc3ab1847655345115b38be
+35	5 janvier 2019	<p>Saw spiderman into the spiderverse today. it was really good.</p><p>dont lie in your journal, what's the point</p>	2019-01-06 04:14:20	2019-01-06 04:14:20	auth0|5bc3ab1847655345115b38be
+9	chasing tips	<p>Went comboing wait for him to air dodge (around the third hit) and back air where he lands.</p>	2018-12-18 21:48:20	2018-12-18 21:48:20	auth0|5bc3ab1847655345115b38be
+10	\N	<p>don't shield and stand and wait for an attack lol</p><p>don't go contest bowser on stage</p><p>land your aerials on the other side of the enemy</p>	2018-12-18 21:58:15	2018-12-18 22:01:01	auth0|5bc3ab1847655345115b38be
+37	\N	<p>Feels like either I'm lazy and sad or active and happy. That's really it.</p><p><br></p><p><br></p><ul><li>Even if you breakdown in the middle of the song, the song still goes on.</li><li>Resistance is really really real, I keep thinking I should have more free time. I'd enjoy life more this way, maybe it's a lie. Maybe I actually enjoy doing what I'm doing and that's what I should be doing.</li><li>Resistance is thinking you deserve/need a break</li><li>There's no more Mac songs in any playlists I made, a system I created to mitigates breakdown. Risk Management 101.</li></ul>	2019-01-06 18:23:57	2019-01-06 19:32:55	auth0|5bc3ab1847655345115b38be
+40	webz	<p>d'où j'viens,</p><p>le monde sont pas toujours gentil</p><p>on aime avoir un opinion provocant</p><p>se faire entendre</p><p>on veut sfaire entendre parce qu'on aime ça, ça nous valorise</p><p>fuck les conséquences</p><p>c'est pas très beau d'où jviens</p><p>on perd notre temps</p><p>on devient fou</p><p>quand quelqu'un me demande si y devrait visiter</p><p>jlui dit non, du moins pas longtemps</p><p>mais même pas longtemps c'est dangereux</p><p>on s'y perd</p><p>on lit des trucs</p><p>on n'en sort pu</p><p>j'aime pas trop d'où jviens</p><p>j'en suis pas très fier</p>	2019-01-07 04:32:30	2019-01-07 04:32:41	auth0|5bc3ab1847655345115b38be
+43	vacance weird	<p>on etait allé porter jules en avion à st criss en avion avant d'aller dans le sud.</p><p>Pi pour se rendre là fallait que l'avion fasse des ostis daccrobaties</p><p><br></p><p>dans ce rêve de ce jour là tho.</p><p>on allait tous à occidental caribe, sauf qui fallait faire un ptit detour encore, l'avion a décollé en l'envers avant de fly vraiment bas et passer dans une montagne en beigne.</p><p>Rendu à Punta Cana, on etait atteri sur une île, pi fallait prendre un boat pour se rendre à l'hôtel</p>	2019-01-07 16:19:57	2019-01-07 16:19:57	auth0|5bc3ab1847655345115b38be
+8	FalcoReplayFeedback1	<h2>vs Pichu</h2><h4><strong>Observation</strong></h4><p>gotta be precise about my down air against pichu</p><p>she is campable</p><p>don't trade at high percent</p><p><br></p><p><br></p><h4>Corrective Actions</h4><p>Recover below ledge against Wolf</p><p>Bait the get up attack by smashing dans le vide then grab.</p><p>NO FAIR, it doesn't hit the bitch</p><p>Try NAIR against her.</p><h2><br></h2><h2><br></h2><h2><br></h2><h2><br></h2><h2>vs Wolf</h2><h4><strong>Observation</strong></h4><p>wtf was that smash</p><h4>Cause</h4><h4><br></h4><h4>Corrective Actions</h4><p>Recover below ledge against Wolf</p><p>Bait the get up attack by smashing dans le vide then grab.</p><p><br></p><h2>vs Cloud</h2><h4><strong>Observation</strong></h4><p>He has near F1 ground attack</p><p>Try to juggle him</p><p>Lots of contest of his up air</p><p>REALLY SHITTY RECOVERY</p><h4>Cause</h4><h4><br></h4><h4>Corrective Actions</h4><p>Favor</p><p>Do fair air<span style="color: var(--md-theme-default-text-primary-on-background-variant, rgba(0,0,0,0.87)); letter-spacing: 0.01em;">d grabs something to get him offstage</span></p><p>When you are behind someone, go for the grab</p>	2018-12-18 18:27:08	2018-12-18 23:28:57	auth0|5bc3ab1847655345115b38be
+13	Mindset	<p>Mindset is the only thing preventing you from getting good at anything</p>	2018-12-20 00:13:29	2018-12-20 00:13:29	auth0|5bc3ab1847655345115b38be
+15	Pressure	<p>It seems my attempt at dealing with pressure is usually to avoid it.</p><p><br></p><p>Instead, pressure shouldn't be avoided, it should be used as fuel, as something that makes you better, a stress to perform, that right now you care about life.</p><p>A courageous act.</p>	2018-12-20 17:32:29	2018-12-20 17:32:29	auth0|5bc3ab1847655345115b38be
+17	Techs	<p>Dash attack cancel: L stick forward, C stick forward into Jump cancel</p><p><br></p><p>Tilt cancel: tilt behind you and jump to instantly neutral</p><p>can be used mid run to backair from dash</p><p><br></p><p>Instantly throw: c stick + jump to instantly pick up and run.</p><p><br></p><p>Instant reverse aerial:</p><p>Dash reverse direction, c stick opposite direction THEN jump</p>	2018-12-23 22:26:08	2018-12-23 22:46:18	auth0|5bc3ab1847655345115b38be
+21	Video Games	<p>Maybe cut competitive video games out of my life, I don't think I gain much from them.</p>	2018-12-27 03:17:32	2018-12-27 03:17:46	auth0|5bc3ab1847655345115b38be
+34	Spiderman into the spiderverse	<p>That movie was so good.</p><p>There was a lot of love put into it.</p><p>The animations were gorgeous</p><p>The story was good, actually really good, the backstory was super well thought.</p><p>After seeing it I felt so powerful.</p><p>It was message of hope, that you can do what you want in life no matter the stakes.</p><p><br></p><p>It was a love letter to everything spiderman is.</p><p>There was also a nice quote by Stan Lee.</p><p>And it was an homage to both Stan Lee and Steve Ditko.</p><p>An excellent last movie.</p>	2019-01-06 04:13:03	2019-01-06 04:22:45	auth0|5bc3ab1847655345115b38be
+38	Lunch	<p>Sandwich</p><p><br></p><ul><li>Bread</li><li>Meat</li><li>Laitue</li><li>Tomato</li><li>Mayo</li><li>Mustard</li></ul><p><br></p><p>Clementine</p><p>Pomme</p><p>Carrotte</p>	2019-01-06 23:43:55	2019-01-06 23:45:22	auth0|5bc3ab1847655345115b38be
+41	mtl	<p>où j'habite c'est plus beau</p><p>quand jréussi à sortir de chez moi</p><p>jvois la vie</p><p>je <u>vis</u></p><p>jobserve</p><p>jminpregne de l'atmosphère</p><p>jme promène dans l'anonymat et on est bien</p><p><br></p>	2019-01-07 04:34:32	2019-01-07 04:34:32	auth0|5bc3ab1847655345115b38be
+42	Waking up	<ol><li>Open blinds</li><li>5 pull ups</li><li>Good back</li><li>Turn off alarm</li><li>Put on last night tshirt and joggings</li><li>Make coffee</li><li>Make breakfast</li><li>Eat and read motivation book</li><li>Jogging</li><li>Wash</li><li>Prepare bag</li><li>Prepare food</li><li>Prepare collations</li><li>Put on Deodorant</li><li>Play with Alice</li><li>Go to school kid</li></ol>	2019-01-07 14:39:10	2019-01-07 15:23:55	auth0|5bc3ab1847655345115b38be
+14	Iron Man	<p><strong>Mario: Really fun to play, his fAIR IS SO SLOW, hard to kill with I think, might need a round two</strong></p><p><strong>DK: Fun to play af, but not really my kind of character</strong></p><p>Link: Pretty good damn boring lol</p><p>Samus: kind of fun, needs to be played campy to optimize</p><p>Dark Samus: Same thing I think</p><p><strong>Yoshi: actually really fun wtf lol</strong></p><p>Kirby: holy fuck he is bad lol</p><p>Fox: ISN'T MELEE FOX BOY, alright but feels really weird</p><p><strong>Pikachu: BOY, has multi hit like falco which is fucking unfun lol. BUT ACTUALLY FUN</strong></p><p>Luigi: Hot trash</p><p><strong>Ness: really fun but recovery is hard, more online.</strong></p><p>Falcon: feels clunky</p><p>Puff: Nope</p><p>Peach: pretty fucking boring</p><p>Iceys: lol</p><p>Sheik: Yikes</p><p>Zelda: ZZZ</p><p>Dr. Mario: zzzzzzzzzzzzz jesus</p><p><strong>Pichu:I SUCK</strong></p><h2>Falco: fun as hell, kind of weak neutral, but could be overcame with good pressure from laser and central stage dominance</h2><p>Marth: I suck</p><p>Lucina: I suck</p><p><strong>Young Link: pretty fun</strong></p><p><strong>Ganondorf: Fun character. slow af</strong></p><p><strong>Mewtoo: good and fun but not so fun.</strong></p><p>Chrom: I suck</p><p>Mr Game. &amp; Watch: Nope</p><p><strong>Meta Knight: Surpisingly fun, not sure he's good tho</strong></p><p><strong>Pit: Fun as hell my dude + SS HAIR</strong></p><p><strong>Dark Pit: he's the same character caman</strong></p><h2>Zero Suit Samus: <strong>possible main</strong></h2><p><strong>Wario: hey it's fun bro</strong></p><p><strong>Snake: holy smoke he's fun</strong></p><p><strong>Ike: Yo he's fun too, pretty original</strong></p><h2><strong>Pokemon trainer: could main, lots of potential.</strong></h2><p>Diddy: meh, but at the same time, I feel like he needs time to learn.</p><p>Lucas: more fun than ness, still recovery is hard.</p><p>Sonic: pretty fun</p><p>Kind Dedede: he fucking sucks jesus</p><p>Olimar: zzz</p><p>Lucario: legit af</p><p>R.O.B.: Zzzz</p><p>Toon Link: meh</p><p>Wolf: CAN'T KILL MAN</p><p>Villager: actually super fun lol</p><p>Mega Man: pretty good actually</p><p>Wii Fit Trainer: nice serve girl</p><p>Rosalina &amp; Luma: ...</p><p>Little Mac: Blows</p><p>Greninja: too slow</p><p>Palutena: Camping bitch</p><p>Pacman: Yikes</p><p>Robin: Well well well</p><p>Shulk: pretty good</p><p>Bowser JR. camping bitch</p><p>Duck Hunt: absolute tash</p><p>Ryu: worse than ken</p><h2>Ken: pretty fun</h2><p>Cloud: Spam side b lol. sad</p><p>Bayo: can't kill feels weird</p><p>Corrin: fun but bad</p><p>inlking: too good, would feel bad if I lost playing them</p><p>Ridley: so fucking fat, easy to camp</p><p>belmonts: campy bitches</p><p>King K. Rool: campy bitch</p><p>Isabelle: fun as fuck</p><p>Incineroar: fun as fuck</p><p><br></p>	2018-12-20 02:00:28	2018-12-21 03:04:47	auth0|5bc3ab1847655345115b38be
+16	\N	<p>Main page should show recent posts and which tag they're with</p>	2018-12-21 21:01:50	2018-12-21 21:01:50	auth0|5bc3ab1847655345115b38be
+20	\N	<p>I should care less about school, go to school to learn, spend the other time enjoying life</p><p>Drink more, see more people, go out more.</p><p>Accept that you have things to do for school, do them and get over it.</p>	2018-12-27 02:17:14	2018-12-27 02:17:14	auth0|5bc3ab1847655345115b38be
+19	Reading Heminway I've been a leader not a lemon	<p>So here's the plan I've come up for my future self:</p><p><br></p><p><br></p><ol><li>Pay off debts</li><li>Spend as less as possible</li><li>Expand BrainyDump, turn it into something sustainable AND great</li><li>Take it slow while travelling the world</li><li>Drink a lot, tip well, make friends</li><li>Cut on toxic people</li><li>Pack light and wear preppy <em>80s</em> preppy athletic clothes.</li><li>Don't have a single woman, have a lot of woman</li><li>Practice jogging or any sports you fancy</li></ol><p><br></p><p>Maybe cut competitive video games out of my life, I don't think I gain much from them.</p>	2018-12-27 02:16:14	2018-12-27 03:17:15	auth0|5bc3ab1847655345115b38be
+22	Community Center	<h2>Animal Bundle</h2><p>Big brown egg, Big white egg</p><p><br></p><p><br></p><h2>Fall Foraging bundle</h2><p>BlackBerry and other 3 things</p><p><br></p><h2>Fall Crops bundle</h2><p>Shroom Mauve, Shroom brun/beige</p><p><br></p><h2>Night fish bundle</h2><p>Fish bleu dans inventaire</p><p><br></p><h2>Fall Crops bundle</h2><p>Citrouille, truc weirds</p><p><br></p><h2>Quality Crops bundle</h2><p>Citrouille</p><p><br></p><h2>Construction bundle</h2><p>2x Wood + Stone + Hardwood</p>	2018-12-28 02:56:43	2018-12-28 03:00:48	auth0|5bc3ab1847655345115b38be
+24	2019	<p>Possible projects:</p><p>World map avec les villes visitées dans chaque livre</p><p><br></p><p><br></p><p>Goals:</p><p>Learn how to swim</p><p>Learn how to breath</p><p>Read more</p><p>More bath</p><p>GET LEGS</p>	2018-12-31 22:22:50	2019-01-02 03:06:10	auth0|5bc3ab1847655345115b38be
+27	Headphones	<p>Maybe, my whole life I've been using headphones as a way to hide from the world and ignore what is surrounding me instead of accepting it. Headphones should be used when I feel like listening to music. Not when I feel like being in my own bubble.</p>	2019-01-03 18:29:41	2019-01-03 18:29:41	auth0|5bc3ab1847655345115b38be
+30	\N	<p>Had a dream last night</p>	2019-01-04 01:34:15	2019-01-04 01:34:15	auth0|5bc3ab1847655345115b38be
+26	Cours 1 - 3 janvier 2019	<h2>Plan de cours</h2><p>Livre 100$, à déterminer si permis à l'examen</p><p><br></p><p>Premier lab, premiere mercredi</p><p>Regarder comment utiliser git avec unreal engine.</p><p><br></p><p>https://cours.etsmtl.ca/log725/private/</p><p>si diff entre moodle et site, prendre moodle.</p><p><br></p><h2>Intro aux engins de jeux</h2><p>Différents éléments essentiels aux engins de jeux qui intéragissent ensemble</p><p>Les data (assets or ressources) sont traités pas différents <em>components</em> de l'engin afin de créer un output</p><p><br></p><h3>Unreal engine</h3><p><em>Blueprints</em></p><p>Machine à états très complexe qui permet l'animation (plusieurs types dont level blueprint (conditions à achever pour changer l'état du niveau), character blueprint(mouvement et acitons du personnage, flowchart)</p><p><br></p>	2019-01-03 18:26:07	2019-01-03 21:33:44	auth0|5bc3ab1847655345115b38be
+29	3 janvier 2019	<ul><li>No more school on friyay</li><li>I didn't feel like running today, but I read War of Art and it convinced me that running was the right thing to do. So I went running and it was icey as fuck</li><li>No more headphones in 2019</li><li>Calm af today</li></ul><p><br></p><p>I felt so free today, for the the first time in a while.</p><p>I went to school, no pressure, I arrived early, took my damn time to get there, I didn't have any music on for the first time in a while, I was reading <em>Le petit Prince </em>getting there, it was super good.</p><p>I took some experimental street photography shots.</p><p>I ate looking at people passing by instead of at my phone.</p><p>I walked slow.</p><p>It was awesome.</p>	2019-01-03 19:15:13	2019-01-04 00:34:40	auth0|5bc3ab1847655345115b38be
+31	Le Petit Prince	<p>I just read Le Petit Prince</p><p>It was an amazing book</p><p>Kind of life changing.</p><p>About the importance of what is really important.</p><p>And what really is important.</p><p><br></p><p>About how a relationship is more important than money or something you buy.</p><p>And about how the journey gives a meaning to something.</p><p><br></p><p>-&gt;</p><p><br></p><p>I shouldn't be stressed about not doing anything right now.</p><p>There's an endless struggle in me between doing something or being</p><p>But when I be, I think too much and get stressed.</p><p>Thinking too much leads me to close up and get stressed.</p><p>When I free my mind, I live in the moment and I am happy.</p>	2019-01-04 02:42:06	2019-01-04 02:49:48	auth0|5bc3ab1847655345115b38be
+32	4 janvier 2019	<ul><li>2 commits on BrainyDump + backup experiment</li><li>Stardew Valley, winter season, completed bridge and bus, mine level 85</li><li>Jogging 3.2km</li></ul>	2019-01-04 22:03:43	2019-01-04 22:03:54	auth0|5bc3ab1847655345115b38be
+33	\N	<p>need 2 earth crystal floor 1 to 39</p>	2019-01-05 02:12:50	2019-01-05 02:12:50	auth0|5bc3ab1847655345115b38be
+39	\N	<p>jtrouvais pu aucune raison à essayer de trouver une raison</p>	2019-01-07 04:06:14	2019-01-07 04:06:14	auth0|5bc3ab1847655345115b38be
+36	6 janvier 2019	<ul><li>Jogging. 4.8K</li><li>Did the dishes</li><li>Watched Shameless</li><li>Played Stardew Valley</li><li>Listenend to Charlotte Cardin including that Nate Husser song</li><li>Ate Crêpes</li><li>Vidé le lave-vaisselle</li><li>écouté 1991</li></ul>	2019-01-06 18:20:12	2019-01-07 02:45:03	auth0|5bc3ab1847655345115b38be
+44	Cours 1	<h2>Plan de cours</h2><p>Pas d'intra</p><p>Activités en rouges dans le calendrier sont des évaluations</p><p>Pas de documentation à l'examen</p><p>Il faut prendre des notes, les powerpoints sont pas assez complets</p><p><br></p><h2>Travaux Pratiques</h2><p>Équipes de 3-4</p><p>Début à 8h30 ou 10h30</p><h2><br></h2><h2>Notion de base</h2><h3>Est-ce que c'est une technologie</h3><p>Fromage avec trou: procédé</p><p>Feu: procédé</p><p><br></p><h3>Éléments qui caractérise une technologie</h3><p>connaissance traditionnelle et formelles qui se manifestent dans des objects physiques</p><p>technique (procédé technique)</p><p>technologie (au début: la science des technologies)</p><p><br></p><h3>Art</h3><p>Auparavant le mot arts traitait aussi des arts mécaniques, n'était pas associé à beaux arts</p><p>Art-ificier</p><p>Art-isan</p><p>Art-ificie</p><p>Art-efact (fait par l'art)</p><p><br></p><h3>Technologie</h3><p>Ensemble de systèmes basés sur l'application de connaissance qui se manifeste dans des objets physqiues et des modes d'organisationn, pour l'atteinte d'objectifs spécifiques.</p><p><br></p><p>La technologie peut créer et solver des problèmes (par exemple la crise environnementale)</p><p><br></p><p>Le début de la consommation des combustibles fossiles se fait en grande-bretagne lorsqu'on commence à exploiter le charbon dans les mines (puisqu'on avait pu d'arbre), ceci est permis par la machine à vapeur qui permet de pomper l'eau et qui marche au charbon aussi.</p><p><br></p><h3>Société</h3><p>[Géographie, Culture, Occupation], [Famille] }</p><p>Communauté. Institutins, Réseaux Sociaux, Équipe }</p><p>Groupes }</p><p>-&gt; Individus -{Intérêts, Motivations, Valeurs}</p><p>Intéractions -&gt;</p><p>[2018-06-13]</p><p>Les locaux pour l'intra du mercredi 20 juin à 9h sont :</p><p>A-2330 pour les codes permanents débutant par AGNV jusqu'à LANM</p><p>-&gt; Interdépendances -&gt; chacun d'entre nous se spécialise dans des domaines, ainsi on relie sur les autres pour faire cqu'on sait pas faire</p><p>Le terme société fait référence à des individus et interactions continues, ou à large.... <strong>(à compléter)</strong></p><p><br></p><h3>Environnement</h3><p>Milieu de vie</p><p>Carbone dans l'océean</p><p><strong>Définition</strong></p><p>Ensemble des éléments (biotiquese ou abiotiques) qui entourent un individu ou une espèce et dont certains contribuent directement à subvenir à ses besoins.</p><p>Ensemble des éléments objectifs (qualité de l'air, bruit, etc.) et subjectifs (beauté d'un paysage, qualité d'un site, etc.) constituant de cadre de vie d'un individu.</p>	2019-01-08 14:12:10	2019-01-08 15:45:14	auth0|5bc3ab1847655345115b38be
+48	Jogging	<p><strong>Going</strong></p><p><br></p><p><br></p><ol><li>Put on hoodie</li><li>Put ptit banc dans l'entrée</li><li>Get shoes, earbuds, gloves, keys</li><li>Put on shoes</li><li>Plug earbuds</li><li>Lock door</li><li>Put on gloves</li><li>Start song</li><li>Start fit</li><li>Lock door downstair</li></ol><p><br></p><p><strong>Coming back</strong></p><p><strong>Stretches</strong></p><p><br></p><ol><li>Hold legs with fingers crossed and shoulders back</li><li>Make circles in one direction with feet</li><li>Make circles in opposite direction with feet</li><li>Go up and down with feet</li></ol><p><br></p><p><br></p><ol><li>Char like position</li><li>Put one leg on opposite knee and sit</li><li>Do the same for the opposite</li></ol><p><br></p><p><br></p><ol><li>Hold le feet au cul while staying straight</li></ol><p><br></p><p><br></p><ol><li>Extend leg in the to 180 degrees</li><li>Put hands a little above the knee</li><li>Pull back with toes</li></ol><h1>POSTURE</h1><p>1. Shoulders back for Open Chest and Breathing.</p><p>2. Head Position, good posture - looking forward, not down or up.</p><p>3. Elbows tucked in slightly.</p><p>4. Too much Hip movement side to side. Use Core more.</p><p>5. Landing on the Balls of your feet NOT HEELS.</p><p>6. (FREE TIP) Lean slightly forward and let "gravity" help you with momentum.</p><p><br></p>	2019-01-09 18:53:15	2019-01-09 19:11:51	auth0|5bc3ab1847655345115b38be
+45	Cours 1	<h2>Question d'examen</h2><p>Représentation sous forme d'arbre de l'expression algébrique (page 20 pdf, cours 1)</p><p>Si on demande de manipuler des schémas incompatible, on les manipule pas</p><p><br></p><h2>Intro</h2><p>Examen: Mettre de la schnout quand tu sais pas quoi répondre</p><p>Email: cl-Bilal.Alchalbi@etsmtl.ca, cc-Maxence.VANDEVIERE@etsmtl.ca</p><p>Remise par moodle</p><p><strong>Quizz à séance 4</strong></p><p><strong>Faire exercices pour chaque cours</strong></p><p><strong>INTRA, </strong>pas de documentation</p><p>Pas besoin du livre</p><p><br></p><h1>Contenu du cours</h1><h2>Introduction au modèle relationnel</h2><p>Domaine: ensemble de valeurs</p><p>Relation ensemble de tuples</p><p>SQL: multi-ensemble</p><p>Lignes/Tuples -&gt;&nbsp;entrée dans la table</p><p><br></p><p>Deux facettes du concept de table</p><p>-&gt; schéma</p><p>-&gt; instanciée, à état</p><p><br></p><p><br></p><p>Deux types de façon d'utiliser BD</p><p>1) Lit + fourni (extraire) (Business Intelligence)</p><p>2) Trasnsactionnel</p><p><br></p><p><strong>Contrainte de domaine et de valeur nulle</strong></p><p>le schéma relationnel impose des concepts sur le domaine</p><p><br></p><h3>Clés</h3><p>Clé unique (unique key) ou superclé (superkey)</p><p><strong>Ensemble</strong> de colonnes identifiant de manière unique une ligne</p><p>Clé candidate</p><p>Clé unique minimale (on ne peut pas retirer de colonne sans perdre l'unicité)</p><p>Clé primaire (primary key)</p><p>Clé <strong>candidate</strong> servant à référencer les lignes de la table</p><p>Contrainte d'entité</p><p>Chaque table doit avoir une clé primaire non-nulle</p><p>Contrainte d'intégrité référentielle</p><p>Clé étrangère non nulle -&gt; clé primaire</p><p><br></p><h3>Algèbre relationnelle</h3><p>Opération de manipulation de donnnées</p><p><strong>Entrée</strong></p><p>Une table - opération unaire</p><p>Deux tables - opérations binaire</p><p><strong>Sortie</strong></p><p>Une table contenant le résultat de l'opération</p><p><br></p><p><strong>Sélection (σ)</strong></p><p><em>prixUnitaire &lt; 20.00 ET noArticle &gt; 30 (Article) </em>(where)</p><p><br></p><p><strong>Projection (π)</strong></p><p><strong><em>π</em></strong><em>&nbsp;noClient, dateCommande (Commande)</em></p><p>(on sélectionne un subset de colonne)</p><p><br></p><p><strong>Produit cartésien (×)</strong></p><p><em>Client × Commande </em></p><p>× Produire une table qui est le croisement entre les données de deux tables</p><p>BAD, pas fait pour ça</p><p>crée des oclonnes redondantes</p><p><br></p><p><strong>Jointure naturelle (|X|)</strong></p><p><em>Client |X| Commande</em></p><p>ne répète pas les colonnes</p><p>optimal</p><p>repose sur un seul champs</p><p><br></p><p><strong>Jointure composée (|X|)</strong></p><p>Plus que un seul champs dans une table pour créer la relation</p><p><br></p><p><strong>Opération renommer (ρ)</strong></p><p>π Client.noClient, Client2.noClient, (σ Client.noTéléphone = Client2.noTéléphone (Client × ρ Client2 (Client)))</p><p>Utile pour trouver les données en doubles, par exemple: quels clients ont le même numéro de téléphone.</p><p><br></p><p><strong>Jointure-θ</strong></p><p>Client ! noClient = numéroClient Commande altérée = σ noClient = numéroClient (Client × Commande altérée)</p><p>permet de spécifier la colonne avec laquelle on fait l'union</p><p><br></p><p><strong>Jointure externe</strong></p><p>■ Inclure les « célibataires »</p><p>Produire les informations au sujet des Clients et de leurs Commandes incluant les informations sur les Clients qui n’ont pas placé de commande</p><p>• La jointure externe à gauche</p><p>• T1 =! T2 (célibataires de T1 )</p><p>• La jointure externe à droite</p><p>• T1 != T2</p><p>• La jointure externe pleine</p><p>• T1 =!= T2</p><p><br></p>	2019-01-08 23:09:37	2019-01-09 00:56:50	auth0|5bc3ab1847655345115b38be
+46	7 janvier 2019	<ul><li>Jogged, was so damn cold, had to come back</li><li><span style="color: var(--md-theme-default-text-primary-on-background, rgba(0,0,0,0.87)); letter-spacing: 0.01em;">Got hammered today, after my class. Was pretty fun</span></li></ul>	2019-01-09 12:54:13	2019-01-09 12:54:13	auth0|5bc3ab1847655345115b38be
+47	8 janvier 2019	<ul><li>woke up with a cold</li><li>wasn't easy but still convinced myself to go jogging</li><li>grocery</li><li>napped with the dog</li><li>ate spaghetti</li><li>ate tao</li><li>went shooting pics</li></ul>	2019-01-09 12:56:43	2019-01-09 12:56:43	auth0|5bc3ab1847655345115b38be
+50	Laboratoire 1	<p>Énoncé sur le vieux site du cours</p><p>faire sur le gitlab</p><p>Jejhejejsjsj</p>	2019-01-10 13:35:23	2019-01-11 03:13:05	auth0|5bc3ab1847655345115b38be
+\.
+
+
+--
+-- Data for Name: posts_tags; Type: TABLE DATA; Schema: public; Owner: bitch
+--
+
+COPY public.posts_tags (tag_id, post_id) FROM stdin;
+7	2
+7	3
+9	4
+8	5
+9	6
+8	7
+8	8
+8	9
+8	10
+12	11
+12	12
+8	13
+8	14
+12	15
+9	16
+8	17
+12	18
+14	19
+12	20
+12	21
+16	22
+12	24
+17	26
+12	27
+18	29
+21	30
+12	31
+18	32
+16	33
+12	34
+18	35
+18	36
+7	37
+24	38
+7	39
+7	40
+7	41
+26	42
+21	43
+27	44
+28	45
+18	46
+18	47
+26	48
+29	50
+\.
+
+
+--
+-- Data for Name: schema_migrations; Type: TABLE DATA; Schema: public; Owner: bitch
+--
+
+COPY public.schema_migrations (version, inserted_at) FROM stdin;
+20180805023359	2018-12-11 19:59:20
+20180805023405	2018-12-11 19:59:20
+20180805023725	2018-12-11 19:59:20
+20181206123009	2018-12-11 19:59:20
+20181216223332	2018-12-16 22:48:22
+20190104162442	2019-01-10 02:28:58
+\.
+
+
+--
+-- Data for Name: tags; Type: TABLE DATA; Schema: public; Owner: bitch
+--
+
+COPY public.tags (id, name, inserted_at, updated_at, user_id, parent_id) FROM stdin;
+7	Thoughts	2018-12-13 17:33:43	2018-12-13 17:33:43	auth0|5bc3ab1847655345115b38be	\N
+9	BrainyDump	2018-12-17 15:29:20	2018-12-17 15:29:20	auth0|5bc3ab1847655345115b38be	\N
+8	SmashReplay	2018-12-16 22:57:23	2018-12-17 21:08:26	auth0|5bc3ab1847655345115b38be	\N
+12	Life	2018-12-19 05:09:55	2018-12-19 05:09:55	auth0|5bc3ab1847655345115b38be	\N
+14	Goals	2018-12-27 02:14:01	2018-12-27 02:14:01	auth0|5bc3ab1847655345115b38be	\N
+16	StardewValley	2018-12-28 02:48:40	2018-12-28 02:56:31	auth0|5bc3ab1847655345115b38be	\N
+17	LOG725	2019-01-03 18:25:49	2019-01-03 18:25:49	auth0|5bc3ab1847655345115b38be	\N
+18	Journal	2019-01-03 18:41:08	2019-01-03 18:41:08	auth0|5bc3ab1847655345115b38be	\N
+21	Dreams	2019-01-04 01:33:18	2019-01-04 01:33:18	auth0|5bc3ab1847655345115b38be	\N
+24	Cooking	2019-01-06 23:42:35	2019-01-06 23:42:35	auth0|5bc3ab1847655345115b38be	\N
+26	Systems	2019-01-07 14:37:49	2019-01-07 14:37:49	auth0|5bc3ab1847655345115b38be	\N
+27	TIN503	2019-01-08 14:11:22	2019-01-08 14:11:22	auth0|5bc3ab1847655345115b38be	\N
+28	LOG660	2019-01-08 23:09:08	2019-01-08 23:09:08	auth0|5bc3ab1847655345115b38be	\N
+29	LOG750	2019-01-10 13:34:21	2019-01-10 13:34:21	auth0|5bc3ab1847655345115b38be	\N
+\.
+
+
+--
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: bitch
+--
+
+COPY public.users (id, first_name, last_name, email, inserted_at, updated_at) FROM stdin;
+auth0|5bc3ab1847655345115b38be	\N	\N	\N	2018-12-12 14:17:03	2018-12-12 14:17:03
+\.
+
+
+--
+-- Name: posts_id_seq; Type: SEQUENCE SET; Schema: public; Owner: bitch
+--
+
+SELECT pg_catalog.setval('public.posts_id_seq', 50, true);
+
+
+--
+-- Name: tags_id_seq; Type: SEQUENCE SET; Schema: public; Owner: bitch
+--
+
+SELECT pg_catalog.setval('public.tags_id_seq', 30, true);
+
+
+--
+-- Name: posts posts_pkey; Type: CONSTRAINT; Schema: public; Owner: bitch
+--
+
+ALTER TABLE ONLY public.posts
+    ADD CONSTRAINT posts_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: posts_tags posts_tags_pkey; Type: CONSTRAINT; Schema: public; Owner: bitch
+--
+
+ALTER TABLE ONLY public.posts_tags
+    ADD CONSTRAINT posts_tags_pkey PRIMARY KEY (tag_id, post_id);
+
+
+--
+-- Name: schema_migrations schema_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: bitch
+--
+
+ALTER TABLE ONLY public.schema_migrations
+    ADD CONSTRAINT schema_migrations_pkey PRIMARY KEY (version);
+
+
+--
+-- Name: tags tags_pkey; Type: CONSTRAINT; Schema: public; Owner: bitch
+--
+
+ALTER TABLE ONLY public.tags
+    ADD CONSTRAINT tags_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: bitch
+--
+
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: posts_tags posts_tags_post_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: bitch
+--
+
+ALTER TABLE ONLY public.posts_tags
+    ADD CONSTRAINT posts_tags_post_id_fkey FOREIGN KEY (post_id) REFERENCES public.posts(id) ON DELETE CASCADE;
+
+
+--
+-- Name: posts_tags posts_tags_tag_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: bitch
+--
+
+ALTER TABLE ONLY public.posts_tags
+    ADD CONSTRAINT posts_tags_tag_id_fkey FOREIGN KEY (tag_id) REFERENCES public.tags(id) ON DELETE CASCADE;
+
+
+--
+-- Name: posts posts_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: bitch
+--
+
+ALTER TABLE ONLY public.posts
+    ADD CONSTRAINT posts_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id);
+
+
+--
+-- Name: tags tags_parent_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: bitch
+--
+
+ALTER TABLE ONLY public.tags
+    ADD CONSTRAINT tags_parent_id_fkey FOREIGN KEY (parent_id) REFERENCES public.tags(id);
+
+
+--
+-- Name: tags tags_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: bitch
+--
+
+ALTER TABLE ONLY public.tags
+    ADD CONSTRAINT tags_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id);
+
+
+--
+-- PostgreSQL database dump complete
+--
+
