@@ -23,7 +23,7 @@ export default {
   data() {
     return {
       tag: this.value,
-      tags: this.init?[{id: this.init.id, text: this.init.name}]:[],
+      tags: this.init ? [{ id: this.init.id, text: this.init.name }] : [],
       autocompleteItems: [],
       debounce: null
     };
@@ -36,14 +36,12 @@ export default {
   },
   methods: {
     update(newTags) {
-      console.log(newTags);
       this.tags = newTags;
     },
     initItems() {
       clearTimeout(this.debounce);
       this.debounce = setTimeout(() => {
         tag_api.get_tags(response => {
-          console.log(response);
           this.autocompleteItems = response.map(a => {
             return { text: a.name, id: a.id };
           });

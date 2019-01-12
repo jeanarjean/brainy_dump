@@ -3,8 +3,8 @@
     <md-field class="input">
       <label>Tag Name</label>
       <md-input v-model="data.name"></md-input>
-      <md-button class="md-raised md-primary" v-on:click="this.createTag">Create</md-button>
-      <TagAutoComplete v-model="data.parent" max_tags="1"></TagAutoComplete>
+      <md-button class="md-raised md-accent" v-on:click="this.createTag">Create</md-button>
+      <!-- <TagAutoComplete v-model="data.parent" max_tags="1"></TagAutoComplete> -->
     </md-field>
   </div>
 </template>
@@ -26,7 +26,8 @@ export default {
   },
   methods: {
     createTag() {
-      this.data.parent = this.data.parent[0];
+      // console.log(this.data.parent[0]);
+      // this.data.parent = this.data.parent ? this.data.parent[0] : [];
       tag_api.create_tag(this.data, response => {
         this.response = response;
       });

@@ -38,18 +38,13 @@ defmodule BrainyDumpWeb.TagController do
           t in user_tags(current_user),
           where: t.id == ^id,
           left_join: posts in assoc(t, :posts),
-          preload: [posts: posts]
+          left_join: parent in assoc(t, :parent),
+          preload: [posts: posts, parent: parent]
         )
       )
 
-    tag =
-      tag
-      |> Repo.preload(:parent)
-
     render(conn, "show.json", tag: tag)
   end
-
-  def create(conn, tag_params, current_user)
 
   def create(conn, tag_params, current_user) do
     tag = Tag.changeset(%Tag{}, tag_params, nil, current_user)
@@ -57,7 +52,10 @@ defmodule BrainyDumpWeb.TagController do
     if tag.valid? do
       {:ok, tag} = Repo.insert(tag)
 
-      tag = Repo.preload(tag, :posts)
+      tag =
+        tag
+        |> Repo.preload(:posts)
+        |> Repo.preload(:parent)
 
       conn
       |> put_status(:created)

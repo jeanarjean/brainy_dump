@@ -1,31 +1,46 @@
 <template>
   <div>
-    <div>
-      <span class="md-display-1">Recent Posts</span>
-    </div>
-    <br>
-    <md-card class="post-card" v-for="post in data.posts" :key="post.id">
-      <md-card-header class="header-style">
-        <div class="md-title">
-          <span class="md-title">
-            <router-link
-              :to="{ name: 'Post', params: { id: post.id }}"
-              class="see-post"
-            >{{post.title?post.title:"Untitled"}}</router-link>
-          </span>
-          <router-link :to="{ name: 'Edit Post', params: { id: post.id}}" class="post-action">
-            <md-button class="md-icon-button">
-              <md-icon>edit</md-icon>
+    <div v-if="data.posts.length != 0">
+      <div>
+        <span class="md-display-1">Recent Posts</span>
+      </div>
+      <br>
+      <md-card class="post-card" v-for="post in data.posts" :key="post.id">
+        <md-card-header class="header-style">
+          <div class="md-title">
+            <span class="md-title">
+              <router-link
+                :to="{ name: 'Post', params: { id: post.id }}"
+                class="see-post"
+              >{{post.title?post.title:"Untitled"}}</router-link>
+            </span>
+            <router-link :to="{ name: 'Edit Post', params: { id: post.id}}" class="post-action">
+              <md-button class="md-icon-button">
+                <md-icon>edit</md-icon>
+              </md-button>
+            </router-link>
+            <md-button class="md-icon-button" v-on:click="deletePost(post.id)">
+              <md-icon>delete</md-icon>
             </md-button>
-          </router-link>
-          <md-button class="md-icon-button" v-on:click="deletePost(post.id)">
-            <md-icon>delete</md-icon>
-          </md-button>
-        </div>
-        <span class="md-title">{{date_formatter.formatDate(post.inserted_at)}}</span>
-      </md-card-header>
-      <md-card-content v-html="post.body"></md-card-content>
-    </md-card>
+          </div>
+          <span class="md-title">{{date_formatter.formatDate(post.inserted_at)}}</span>
+        </md-card-header>
+        <md-card-content v-html="post.body"></md-card-content>
+      </md-card>
+    </div>
+    <div v-else>
+      <md-empty-state
+        md-icon="book"
+        md-label="Seems you haven't created any post yet"
+        md-description="Start by adding creating a tag using the sidebar, then click on the big red plus button to add a new post"
+      ></md-empty-state>
+    </div>
+    <div class="add-button">
+      <div></div>
+      <md-button class="md-fab md-accent" :to="{ name: 'New Post', params: {tag: tag}}">
+        <md-icon>add</md-icon>
+      </md-button>
+    </div>
   </div>
 </template>
 
@@ -79,5 +94,12 @@ export default {
 
 .post-card {
   margin-bottom: 2vh;
+}
+
+.add-button {
+  display: flex;
+  position: sticky;
+  justify-content: space-between;
+  bottom: 25px;
 }
 </style>

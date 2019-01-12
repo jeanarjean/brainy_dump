@@ -24,13 +24,15 @@ defmodule BrainyDumpWeb.PostView do
 
   def render("post_complete.json", %{post: post}) do
     case post.tags do
-      nil ->    %{
-      id: post.id,
-      title: post.title,
-      body: post.body,
-      updated_at: post.updated_at,
-      inserted_at: post.inserted_at,
-    }
+      nil ->
+        %{
+          id: post.id,
+          title: post.title,
+          body: post.body,
+          updated_at: post.updated_at,
+          inserted_at: post.inserted_at
+        }
+
       tags ->
         %{
           id: post.id,

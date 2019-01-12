@@ -1,6 +1,9 @@
 <template>
   <div>
-    <md-toolbar class="md-transparent bold" md-elevation="0">Tags</md-toolbar>
+    <md-toolbar class="md-transparent bold" md-elevation="0">
+      <div style="flex: 1;">Tags</div>
+      <md-button class="md-raised md-accent" :to="{ name: 'New Tag'}">Add tag</md-button>
+    </md-toolbar>
     <md-list>
       <md-list-item
         v-for="tag in tags"

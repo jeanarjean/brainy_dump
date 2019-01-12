@@ -9,7 +9,10 @@
       <br>
       <quill-editor class="body-editor" v-model="data.body"/>
       <br>
-      <button v-on:click="this.editPost">Send</button>
+      <div class="bottom">
+        <div style="flex: 1;"></div>
+        <md-button class="md-raised md-accent" v-on:click="this.createPost">Create</md-button>
+      </div>
     </div>
   </div>
 </template>
@@ -117,4 +120,8 @@ export default {
   height: 60vh;
 }
 
+.bottom {
+  display: flex;
+  align-content: space-between;
+}
 </style>

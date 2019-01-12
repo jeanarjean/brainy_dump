@@ -19,28 +19,37 @@
           v-if="tag.posts"
         >Last updated: {{tag.posts[0]?date_formatter.formatDate(tag.posts[0].updated_at):date_formatter.formatDate(tag.updated_at)}}</span>
       </div>
-      <div class="post" v-for="post in tag.posts" :key="post.id">
-        <div class="post-title">
-          <span class="left-side-title">
-            <span class="md-title">
-              <router-link
-                :to="{ name: 'Post', params: { id: post.id }}"
-                class="see-post"
-              >{{post.title?post.title:"Untitled"}}</router-link>
-            </span>
-            <router-link :to="{ name: 'Edit Post', params: { id: post.id}}" class="post-action">
-              <md-button class="md-icon-button">
-                <md-icon>edit</md-icon>
+      <div v-if="tag.posts.length != 0">
+        <div class="post" v-for="post in tag.posts" :key="post.id">
+          <div class="post-title">
+            <span class="left-side-title">
+              <span class="md-title">
+                <router-link
+                  :to="{ name: 'Post', params: { id: post.id }}"
+                  class="see-post"
+                >{{post.title?post.title:"Untitled"}}</router-link>
+              </span>
+              <router-link :to="{ name: 'Edit Post', params: { id: post.id}}" class="post-action">
+                <md-button class="md-icon-button">
+                  <md-icon>edit</md-icon>
+                </md-button>
+              </router-link>
+              <md-button class="md-icon-button" v-on:click="deletePost(post.id)">
+                <md-icon>delete</md-icon>
               </md-button>
-            </router-link>
-            <md-button class="md-icon-button" v-on:click="deletePost(post.id)">
-              <md-icon>delete</md-icon>
-            </md-button>
-          </span>
-          <span class="md-title">{{date_formatter.formatDate(post.inserted_at)}}</span>
+            </span>
+            <span class="md-title">{{date_formatter.formatDate(post.inserted_at)}}</span>
+          </div>
+          <hr>
+          <div v-html="post.body"></div>
         </div>
-        <hr>
-        <div v-html="post.body"></div>
+      </div>
+      <div v-else>
+        <md-empty-state
+          md-icon="book"
+          md-label="This tag contains no post yet"
+          md-description="Click on the big red plus button to create a new post!"
+        ></md-empty-state>
       </div>
       <div class="add-button">
         <div></div>

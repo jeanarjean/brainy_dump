@@ -79,9 +79,6 @@ export default {
 };
 </script>
 
-};
-</script>
-
 <style lang="scss" scoped>
 .md-app {
   height: 100vh;

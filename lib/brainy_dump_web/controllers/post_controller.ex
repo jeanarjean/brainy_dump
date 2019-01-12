@@ -43,6 +43,7 @@ defmodule BrainyDumpWeb.PostController do
 
   def create(conn, post_params, current_user) do
     tag_list = post_params[:tags]
+
     tags =
       tag_list
       |> Enum.map(fn tag ->
