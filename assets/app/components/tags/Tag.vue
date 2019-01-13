@@ -19,7 +19,7 @@
           v-if="tag.posts"
         >Last updated: {{tag.posts[0]?date_formatter.formatDate(tag.posts[0].updated_at):date_formatter.formatDate(tag.updated_at)}}</span>
       </div>
-      <div v-if="tag.posts.length != 0">
+      <div v-if="tag.posts && tag.posts.length != 0">
         <div class="post" v-for="post in tag.posts" :key="post.id">
           <div class="post-title">
             <span class="left-side-title">

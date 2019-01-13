@@ -4,14 +4,14 @@
       <input placeholder="Title (optional)" class="post-form-title" v-model="data.title">
       <br>
       <br>
-      <TagAutoComplete :init="data.tags" v-model="data.tags"></TagAutoComplete>
+      <TagAutoComplete v-model="data.tags"></TagAutoComplete>
       <br>
       <br>
       <quill-editor class="body-editor" v-model="data.body"/>
       <br>
       <div class="bottom">
         <div style="flex: 1;"></div>
-        <md-button class="md-raised md-accent" v-on:click="this.createPost">Create</md-button>
+        <md-button class="md-raised md-accent" v-on:click="this.editPost">Edit</md-button>
       </div>
     </div>
   </div>
@@ -30,7 +30,7 @@ export default {
   },
   data() {
     return {
-      data: {},
+      data: { tags: "" },
       response: {}
     };
   },

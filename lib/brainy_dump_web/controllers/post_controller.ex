@@ -43,17 +43,31 @@ defmodule BrainyDumpWeb.PostController do
 
   def create(conn, post_params, current_user) do
     tag_list = post_params[:tags]
+    Logger.warn(inspect(tag_list))
 
     tags =
-      tag_list
-      |> Enum.map(fn tag ->
-        Repo.one(
-          from(
-            t in user_tags(current_user),
-            where: t.id == ^tag["id"]
-          )
-        )
-      end)
+      case tag_list do
+        tag_list when is_list(tag_list) ->
+          tag_list
+          |> Enum.map(fn tag ->
+            Repo.one(
+              from(
+                t in user_tags(current_user),
+                where: t.id == ^tag["id"]
+              )
+            )
+          end)
+
+        tag ->
+          [
+            Repo.one(
+              from(
+                t in user_tags(current_user),
+                where: t.id == ^tag["id"]
+              )
+            )
+          ]
+      end
 
     post = Post.changeset(%Post{}, post_params, tags, current_user)
 

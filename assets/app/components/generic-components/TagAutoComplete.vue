@@ -21,6 +21,9 @@ export default {
     VueTagsInput
   },
   data() {
+    if (this.init) {
+      this.$emit("input", { id: this.init.id, text: this.init.name });
+    }
     return {
       tag: this.value,
       tags: this.init ? [{ id: this.init.id, text: this.init.name }] : [],
