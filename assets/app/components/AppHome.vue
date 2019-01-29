@@ -37,9 +37,11 @@
     </div>
     <div class="add-button">
       <div></div>
+      <div class="add-button-div">
       <md-button class="md-fab md-accent" :to="{ name: 'New Post', params: {tag: tag}}">
         <md-icon>add</md-icon>
       </md-button>
+      </div>
     </div>
   </div>
 </template>
@@ -101,5 +103,10 @@ export default {
   position: sticky;
   justify-content: space-between;
   bottom: 25px;
+}
+
+.add-button-div {
+  position: relative;
+  z-index: 5;
 }
 </style>
