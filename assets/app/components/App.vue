@@ -49,25 +49,15 @@ export default {
   },
   data: () => ({
     menuVisible: false,
-    windowWidth: window.innerWidth
+    windowWidth: window.innerWidth,
+    isMobile: false,
+    isClipped: null
   }),
   computed: {
     loggedIn: function() {
       return (
         this.$store.state.auth_token != null && this.$store.state.auth_token
       );
-    },
-    isMobile() {
-      if (this.windowWidth <= 968) {
-        return true;
-      }
-      return false;
-    },
-    isClipped() {
-      if (!this.isMobile) {
-        return "clipped";
-      }
-      return null;
     }
   },
   mounted() {
@@ -75,6 +65,8 @@ export default {
       this.windowWidth = window.innerWidth;
       console.log(this.isMobile);
     });
+    if (this.windowWidth <= 968) this.isMobile = true;
+    if (!this.isMobile) this.isClipped = "clipped";
   }
 };
 </script>
